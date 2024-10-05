@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Cowboy Spaces Books</string>
+    <string name="registroStr">Registrarse</string>
+    <string name="iniciar_SesionStr">Iniciar sesion</string>
+    <string name="logotipoStr">Logo</string>
+</resources>

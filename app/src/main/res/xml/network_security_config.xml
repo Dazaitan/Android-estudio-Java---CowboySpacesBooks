@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config xmlns:tools="http://schemas.android.com/tools">
+    <domain-config cleartextTrafficPermitted="true">
+        <domain tools:ignore="NetworkSecurityConfig">192.168.100.5</domain> <!-- Permitir tráfico HTTP para localhost -->
+    </domain-config>
+</network-security-config>
