@@ -101,12 +101,12 @@
                         android:text="Estás leyendo 2 libros."
                         android:textSize="16sp"
                         android:textColor="@color/black" />
-
+                    <!--Imagenes provisionales-->
                     <ImageView
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginStart="8dp"
-                        android:src="@drawable/ic_user_profile"
+                        android:src="@drawable/ic_usuario"
                         android:background="@drawable/circle_background"
                         android:contentDescription="Imagen de usuario" />
                 </LinearLayout>
@@ -142,16 +142,16 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <!-- Portada de ejemplo: botón de agregar -->
+                    <!-- Portada de ejemplo: botón de agregar (imagenes provisionales)-->
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/ic_add_circle"
+                        android:src="@drawable/ic_mas"
                         android:layout_marginEnd="8dp"
                         android:background="@drawable/circle_background"
                         android:contentDescription="Agregar libro" />
 
-                    <!-- Portada de ejemplo: libro 1 -->
+                    <!-- Portada de ejemplo: libro 1 (imagenes provisionales)-->
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
@@ -198,7 +198,6 @@
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_favorite"
                         android:layout_gravity="end"
                         android:contentDescription="Icono de corazón" />
                 </LinearLayout>
@@ -213,6 +212,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
+            android:layout_marginTop="32dp"
+            android:background="@color/black"
             app:menu="@menu/bottom_nav_menu"
             app:itemIconTint="@color/gray"
             app:itemTextColor="@color/gray"

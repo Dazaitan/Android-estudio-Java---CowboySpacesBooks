@@ -1,0 +1,9 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:shape="oval"
+    tools:ignore="ExtraText">
+    <solid android:color="#d5bdaf" />  <!-- Color de fondo; cámbialo según tus necesidades -->
+    <size
+        android:width="80dp"
+    android:height="80dp" />
+</shape>
