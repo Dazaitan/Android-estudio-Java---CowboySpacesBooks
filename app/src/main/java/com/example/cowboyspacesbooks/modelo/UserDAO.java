@@ -1,10 +1,13 @@
-package com.example.cowboyspacesbooks;
+package com.example.cowboyspacesbooks.modelo;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
+import com.example.cowboyspacesbooks.IloginCallback;
+import com.example.cowboyspacesbooks.controlador.LoginTask;
 
 public class UserDAO {
     private DBAHelper dbaHelper;

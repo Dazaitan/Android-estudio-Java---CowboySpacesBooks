@@ -14,13 +14,13 @@
         android:theme="@style/Theme.CowboySpacesBooks"
         tools:targetApi="31">
         <activity
-            android:name=".Home"
+            android:name=".vista.Home"
             android:exported="false" />
         <activity
-            android:name=".Registro"
+            android:name=".vista.Registro"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name=".vista.Login"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

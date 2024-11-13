@@ -1,10 +1,12 @@
-package com.example.cowboyspacesbooks;
+package com.example.cowboyspacesbooks.controlador;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
+
+import com.example.cowboyspacesbooks.MainActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;

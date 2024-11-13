@@ -1,4 +1,4 @@
-package com.example.cowboyspacesbooks;
+package com.example.cowboyspacesbooks.modelo;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

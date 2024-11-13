@@ -1,16 +1,18 @@
-package com.example.cowboyspacesbooks;
+package com.example.cowboyspacesbooks.vista;
 
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.cowboyspacesbooks.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
-import android.view.View;
+
 import android.view.MenuItem;
 
 public class Home extends AppCompatActivity {
