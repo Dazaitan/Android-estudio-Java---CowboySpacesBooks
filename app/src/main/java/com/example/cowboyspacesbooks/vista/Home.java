@@ -38,9 +38,13 @@ public class Home extends AppCompatActivity {
                     Toast.makeText(Home.this, "Home seleccionado", Toast.LENGTH_SHORT).show();
                     // Lógica para el fragmento o actividad de Home
                     return true;
-                } else if (itemId == R.id.nav_search) {
-                    Toast.makeText(Home.this, "Search seleccionado", Toast.LENGTH_SHORT).show();
+                } else if (itemId == R.id.nav_memorizar) {
+                    Toast.makeText(Home.this, "Memorizar seleccionado", Toast.LENGTH_SHORT).show();
                     // Lógica para el fragmento o actividad de Search
+                    return true;
+                } else if (itemId == R.id.nav_logros) {
+                    Toast.makeText(Home.this, "Logros seleccionado", Toast.LENGTH_SHORT).show();
+                    // Lógica para el fragmento o actividad de Profile
                     return true;
                 } else if (itemId == R.id.nav_profile) {
                     Toast.makeText(Home.this, "Profile seleccionado", Toast.LENGTH_SHORT).show();
