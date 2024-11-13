@@ -14,7 +14,6 @@ public class UserDAO {
     }
     public void login(String email, String password, IloginCallback callback){
         new LoginTask(email,password,this,callback).execute();
-
     }
     public boolean checkLocalDatabase(String email,String password){
         SQLiteDatabase db=dbaHelper.getReadableDatabase();

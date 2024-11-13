@@ -80,7 +80,8 @@ public class RegisterTask extends AsyncTask<String, Void, String> {
                     // Mostrar un Log notificando que el usuario se registró correctamente// Mostrar un Log notificando que el usuario se registró correctamente
                     Log.d("RegisterTask", "Usuario creado correctamente");
                 } else {
-                    Toast.makeText(context, "Error en registro de usuario", Toast.LENGTH_SHORT).show();
+                    String error = jsonObject.getString("message");
+                    Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
                 }
             }catch (JSONException e){
                 e.printStackTrace();

@@ -41,18 +41,11 @@ public class Registro extends AppCompatActivity {
         String apellido =txtApellido.getText().toString();
         String numeroCedula =txtCedula.getText().toString();
         String contrasena =txtContrasena.getText().toString();
-        String contrasenaConfirmar =txtContrasena.getText().toString();
+        String contrasenaConfirmar =txtContrasenaConfirmar.getText().toString();
         String email =txtEmail.getText().toString();
 
         if (contrasena.equals(contrasenaConfirmar)){
             new RegisterTask(Registro.this).execute(numeroCedula,nombre,apellido,email,contrasena);
-            /*long result = userDao.insertUser(nombre,apellido,cedula,email,contrasena);
-            if (result != -1){
-                Toast.makeText(Registro.this,"Usuario registrado correctamente",Toast.LENGTH_SHORT).show();
-                finish();
-            } else {
-                Toast.makeText(Registro.this,"Usuario no registrado :c",Toast.LENGTH_SHORT).show();
-            }*/
         } else {
             Toast.makeText(Registro.this,"Error al confirmar la contraseña",Toast.LENGTH_SHORT).show();
         }

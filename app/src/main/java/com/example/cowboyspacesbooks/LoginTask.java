@@ -33,21 +33,28 @@ public class LoginTask extends AsyncTask<String, Void, Boolean> {
             if (apiResponse != null){
                 try {
                     JSONObject jsonResponse = new JSONObject(apiResponse);
-                    String data = jsonResponse.getString("email");
-
-
-                    if (data.equals(email)){
+                    String datosString = jsonResponse.getString("datos");
+                    JSONObject datos = new JSONObject(datosString);
+                    String emailResponse = datos.getString("email");
+                    if (emailResponse.equals(email)){
                         Log.d("Login","Acceso permitido");
                         return true;
+                    } else {
+                        Log.d("Login","Email no coincide");
+                        return false;
                     }
                 }catch (Exception e){
-                    throw new RuntimeException(e);
+                    Log.e("Login","Error al procesar la respuesta de la API");
+                    return false;
                 }
+            } else{
+                Log.d("Login","Ocurrio un error desconocido");
+                return false;
             }
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Log.d("Login","Error durante la solicitud de la API");
+            return false;
         }
-        return null;
     }
     private String sendDataToAPI(String email, String contrasena){
         try{
@@ -88,6 +95,18 @@ public class LoginTask extends AsyncTask<String, Void, Boolean> {
             e.printStackTrace();
             Log.e("SendDataToAPI", "Error al conectar a la API", e);
             return null; // No se pudo conectar a la API
+        }
+    }
+    protected void onPostExecute(Boolean success) {
+        try {
+            // Llamar al callback basado en el resultado del login
+            if (success != null && success) {
+                callback.onLoginSuccess();
+            } else {
+                callback.onLoginFailure();
+            }
+        } catch (Exception e) {
+            Log.e("Login", "Error al procesar el callback", e);
         }
     }
 }
