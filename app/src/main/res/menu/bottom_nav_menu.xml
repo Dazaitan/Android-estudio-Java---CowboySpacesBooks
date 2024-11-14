@@ -10,7 +10,7 @@
         android:title="Memorizar" />
     <item
         android:id="@+id/nav_logros"
-        android:icon="@drawable/ic_logros_navBar"
+        android:icon="@drawable/ic_logrosnavbar"
         android:title="Logros" />
     <item
         android:id="@+id/nav_profile"

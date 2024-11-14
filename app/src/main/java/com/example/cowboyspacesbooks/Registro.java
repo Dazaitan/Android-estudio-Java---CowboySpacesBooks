@@ -1,4 +1,4 @@
-package com.example.cowboyspacesbooks.vista;
+package com.example.cowboyspacesbooks;
 
 import android.os.Bundle;
 import android.view.View;
@@ -11,10 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
-import com.example.cowboyspacesbooks.R;
-import com.example.cowboyspacesbooks.controlador.RegisterTask;
-import com.example.cowboyspacesbooks.modelo.UserDAO;
 
 public class Registro extends AppCompatActivity {
     private EditText txtNombre,txtApellido,txtEmail,txtContrasena,txtCedula,txtContrasenaConfirmar;

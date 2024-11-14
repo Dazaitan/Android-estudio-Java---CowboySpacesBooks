@@ -1,10 +1,10 @@
-package com.example.cowboyspacesbooks.controlador;
+package com.example.cowboyspacesbooks;
 
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.cowboyspacesbooks.IloginCallback;
-import com.example.cowboyspacesbooks.modelo.UserDAO;
+import com.example.cowboyspacesbooks.UserDAO;
 
 import org.json.JSONObject;
 

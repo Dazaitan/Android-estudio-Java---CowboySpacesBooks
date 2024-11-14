@@ -1,4 +1,4 @@
-package com.example.cowboyspacesbooks.vista;
+package com.example.cowboyspacesbooks;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,10 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-
-import com.example.cowboyspacesbooks.IloginCallback;
-import com.example.cowboyspacesbooks.R;
-import com.example.cowboyspacesbooks.modelo.UserDAO;
 
 public class Login extends AppCompatActivity {
     private EditText editTextEmail;
