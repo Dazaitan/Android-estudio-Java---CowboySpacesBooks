@@ -1,5 +1,6 @@
 package com.example.cowboyspacesbooks;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -24,35 +25,31 @@ public class Home extends AppCompatActivity {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-        // Configurar el listener de la barra de navegación inferior
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int itemId = item.getItemId();
-                if (itemId == R.id.nav_home) {
-                    Toast.makeText(Home.this, "Home seleccionado", Toast.LENGTH_SHORT).show();
-                    // Lógica para el fragmento o actividad de Home
-                    return true;
-                } else if (itemId == R.id.nav_memorizar) {
-                    Toast.makeText(Home.this, "Memorizar seleccionado", Toast.LENGTH_SHORT).show();
-                    // Lógica para el fragmento o actividad de Search
-                    return true;
-                } else if (itemId == R.id.nav_logros) {
-                    Toast.makeText(Home.this, "Logros seleccionado", Toast.LENGTH_SHORT).show();
-                    // Lógica para el fragmento o actividad de Profile
-                    return true;
-                } else if (itemId == R.id.nav_profile) {
-                    Toast.makeText(Home.this, "Profile seleccionado", Toast.LENGTH_SHORT).show();
-                    // Lógica para el fragmento o actividad de Profile
-                    return true;
-                } else {
+            BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+            bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    if (item.getItemId() == R.id.nav_home) {
+                        // Ya estás en la actividad principal
+                        return true;
+                    } else if (item.getItemId() == R.id.nav_memorizar) {
+                        startActivity(new Intent(Home.this, Memorizar.class));
+                        return true;
+                    } else if (item.getItemId() == R.id.nav_logros) {
+                        startActivity(new Intent(Home.this, Logros.class));
+                        return true;
+                    } else if(item.getItemId() == R.id.nav_profile){
+                        return true;
+                    }
                     return false;
                 }
-            }
+            });
+            return insets;
         });
+        //BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+
+        // Configurar el listener de la barra de navegación inferior
+
     }
 }

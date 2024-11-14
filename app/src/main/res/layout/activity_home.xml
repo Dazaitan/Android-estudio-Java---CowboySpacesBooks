@@ -11,7 +11,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFFFF">
+        android:background="@color/backgroundColor">
     <View
         android:id="@+id/fondo_negro"
         android:layout_width="match_parent"
@@ -81,6 +81,12 @@
                         android:textSize="16sp"
                         android:layout_marginTop="8dp"
                         android:textColor="@color/gray" />
+
+                        <ImageView
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:src="@drawable/ic_hmas"
+                            android:layout_marginStart="200dp"/>
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -213,18 +219,7 @@
 
 
     <!-- Barra de navegación inferior -->
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_navigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="32dp"
-            android:background="@color/black"
-            app:menu="@menu/bottom_nav_menu"
-            app:itemIconTint="@color/gray"
-            app:itemTextColor="@color/gray"
-            app:labelVisibilityMode="labeled" />
-
+        <include layout="@layout/nav_bottom_bar" />
     </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

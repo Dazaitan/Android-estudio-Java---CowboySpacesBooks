@@ -3,11 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/main"
     android:layout_height="match_parent"
-    android:background="#121212"
+    android:background="@color/backgroundColor"
     tools:context=".Memorizar">
 
     <!-- Header con título y búsqueda -->
+    <View
+        android:id="@+id/fondo_negro"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:background="@drawable/curved_background"
+        tools:ignore="MissingConstraints" />
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
@@ -191,15 +198,5 @@
     </ScrollView>
 
     <!-- Barra de navegación inferior -->
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:menu="@menu/bottom_nav_menu"
-        app:itemIconTint="#FFFFFF"
-        app:itemTextColor="#FFFFFF"
-        android:background="#000000"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:labelVisibilityMode="labeled"/>
-
+    <include layout="@layout/nav_bottom_bar" />
 </androidx.constraintlayout.widget.ConstraintLayout>
