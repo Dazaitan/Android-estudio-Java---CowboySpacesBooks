@@ -1,0 +1,14 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Color de fondo -->
+    <solid android:color="@color/white" /> <!-- Cambia el color según tu diseño -->
+
+    <!-- Esquinas redondeadas -->
+    <corners android:radius="16dp" /> <!-- Ajusta el valor para mayor o menor redondez -->
+
+    <!-- Opcional: Borde alrededor de la vista -->
+    <stroke
+        android:width="2dp"
+        android:color="@color/gray" /> <!-- Cambia el color y ancho del borde según tus necesidades -->
+</shape>

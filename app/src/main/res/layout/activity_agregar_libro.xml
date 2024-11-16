@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundColor"
+    android:id="@+id/main">
+
+    <!-- Botón de regreso -->
+    <ImageButton
+        android:id="@+id/btn_back"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/rounded_button_background"
+        android:src="@drawable/ic_arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="Volver"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- Botón de guardar -->
+    <ImageButton
+        android:id="@+id/btn_save"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
+        android:scaleType="centerCrop"
+        android:background="@drawable/rounded_button_background"
+        android:src="@drawable/ic_check"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:contentDescription="Guardar"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <!-- Contenedor con ScrollView -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintTop_toBottomOf="@+id/btn_back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <!-- Título -->
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Añadir un libro"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <!-- Imagen de libro -->
+        <ImageView
+            android:id="@+id/iv_book_image"
+            android:layout_width="120dp"
+            android:layout_height="160dp"
+            android:src="@drawable/ic_book_placeholder"
+            android:scaleType="centerCrop"
+            android:background="@drawable/rounded_corner_background"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <!-- Campo de Título -->
+        <EditText
+            android:id="@+id/et_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Título"
+            android:background="@drawable/edit_text_background"
+            android:padding="8dp"
+            app:layout_constraintTop_toBottomOf="@id/iv_book_image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <!-- Campo de Autor -->
+        <EditText
+            android:id="@+id/et_author"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Autor"
+            android:background="@drawable/edit_text_background"
+            android:padding="8dp"
+            app:layout_constraintTop_toBottomOf="@id/et_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+
+        <!-- Campo de Editor -->
+        <EditText
+            android:id="@+id/et_editor"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Editor"
+            android:background="@drawable/edit_text_background"
+            android:padding="8dp"
+            app:layout_constraintTop_toBottomOf="@id/et_author"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+
+        <!-- Campo de ISBN -->
+        <EditText
+            android:id="@+id/et_isbn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="ISBN"
+            android:background="@drawable/edit_text_background"
+            android:padding="8dp"
+            app:layout_constraintTop_toBottomOf="@id/et_editor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+
+        <!-- Pregunta de tipo de libro -->
+        <TextView
+            android:id="@+id/tv_book_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿Qué tipo de libro lees?"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/et_isbn"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <!-- ChipGroup de tipo de libro -->
+        <com.google.android.material.chip.ChipGroup
+            android:id="@+id/chip_group_book_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:singleSelection="true"
+            app:selectionRequired="true"
+            app:layout_constraintTop_toBottomOf="@id/tv_book_type"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp">
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_hardpaper_book"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tapa blanda" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_ebook"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="libro electrónico" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_softpaper_book"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tapa dura" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_audio_book"
+                style="@style/Widget.MaterialComponents.Chip.Choice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Audiolibro" />
+        </com.google.android.material.chip.ChipGroup>
+
+        <!-- Pregunta de número de páginas -->
+        <TextView
+            android:id="@+id/tv_num_pages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿Cuántas páginas tiene el libro?"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/chip_group_book_type"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <!-- Campo de número de páginas -->
+        <EditText
+            android:id="@+id/et_num_pages"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Número de páginas"
+            android:inputType="number"
+            android:background="@drawable/edit_text_background"
+            android:padding="8dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_num_pages"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+
+        <!-- Label para descripción -->
+        <TextView
+            android:id="@+id/tv_description_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Descripción del libro"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/et_num_pages"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <!-- Campo de Descripción -->
+        <EditText
+            android:id="@+id/et_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Ingrese la descripción"
+            android:background="@drawable/edit_text_background"
+            android:padding="8dp"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            app:layout_constraintTop_toBottomOf="@id/tv_description_label"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>

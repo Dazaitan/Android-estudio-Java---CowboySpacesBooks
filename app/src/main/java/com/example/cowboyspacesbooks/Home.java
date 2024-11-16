@@ -10,6 +10,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import android.view.View;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 
@@ -47,9 +49,8 @@ public class Home extends AppCompatActivity {
             });
             return insets;
         });
-        //BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
-
-        // Configurar el listener de la barra de navegación inferior
-
+    }
+    public void onCardClick(View view) {
+        startActivity(new Intent(Home.this, AgregarLibro.class));
     }
 }
