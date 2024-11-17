@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:text="¿Qué libro leíste hoy?"
                 android:textSize="18sp"
-                android:textColor="@color/gray"
+                android:textColor="@color/white"
                 android:layout_marginBottom="16dp" />
 
             <!-- Tarjeta de "Añadir un libro" -->
@@ -81,7 +81,7 @@
                         android:text="¿Hay algún libro que estés leyendo?"
                         android:textSize="16sp"
                         android:layout_marginTop="8dp"
-                        android:textColor="@color/gray" />
+                        android:textColor="@color/black" />
 
                         <ImageView
                             android:layout_width="100dp"
@@ -142,7 +142,7 @@
                 android:layout_height="wrap_content"
                 android:text="Más"
                 android:textSize="16sp"
-                android:textColor="@color/gray"
+                android:textColor="@color/black"
                 android:layout_marginBottom="8dp" />
 
             <HorizontalScrollView
@@ -205,7 +205,7 @@
                         android:layout_height="wrap_content"
                         android:text="1 libro"
                         android:textSize="16sp"
-                        android:textColor="@color/gray"
+                        android:textColor="@color/black"
                         android:layout_marginTop="4dp" />
 
                     <ImageView

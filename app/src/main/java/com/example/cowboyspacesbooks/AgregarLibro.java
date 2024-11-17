@@ -2,6 +2,7 @@ package com.example.cowboyspacesbooks;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -16,6 +17,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.example.cowboyspacesbooks.controlador.AgregarLibroListaTask;
 import com.example.cowboyspacesbooks.controlador.InsertarLibroTask;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
@@ -73,6 +75,7 @@ public class AgregarLibro extends AppCompatActivity {
             EditText etNumPaginas = findViewById(R.id.et_num_pages);
             EditText etDescripcion = findViewById(R.id.et_description);
             ChipGroup chipGroupBookType = findViewById(R.id.chip_group_book_type);
+            ChipGroup chipAddWishList = findViewById(R.id.chip_group_wishlist);
             // Configurar el OnClickListener
             btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -85,20 +88,31 @@ public class AgregarLibro extends AppCompatActivity {
                     String descripcion = etDescripcion.getText().toString().trim();
 
                     // Capturar el chip seleccionado
+                    int selectedChipWishId = chipAddWishList.getCheckedChipId();
+                    String addWishList = "";
+
+
                     int selectedChipId = chipGroupBookType.getCheckedChipId();
                     String bookType = "";
+
                     if (isbn !=""){
                         if (selectedChipId != View.NO_ID) {
                             if (!imageUrl.isEmpty()) {
                                 Chip selectedChip = chipGroupBookType.findViewById(selectedChipId);
                                 bookType = selectedChip.getText().toString();
+                                Chip selectedWishChip = chipAddWishList.findViewById(selectedChipWishId);
+                                addWishList =selectedWishChip.getText().toString();
                                 //Llamar nueva tarea para la insercion a la base de datos
-                                new InsertarLibroTask(AgregarLibro.this).execute(titulo,autor,editor,isbn,numPaginas,descripcion,bookType,imageUrl);
+                                new InsertarLibroTask(AgregarLibro.this).execute(titulo,autor,editor,isbn,numPaginas,descripcion,bookType,imageUrl,addWishList);
                                 //Toast.makeText(AgregarLibro.this, "URL guardada: " + imageUrl, Toast.LENGTH_SHORT).show();
+
+                                if (addWishList.equals("Sí")){
+                                    Log.d("AgregarLibro","Entro al if para la creacion de la nuneva tarea");
+                                    new AgregarLibroListaTask(AgregarLibro.this).execute("7",isbn);
+                                }
                             } else {
                                 Toast.makeText(AgregarLibro.this, "No se ha ingresado una URL", Toast.LENGTH_SHORT).show();
                             }
-
                         } else {
                             bookType = "No seleccionado"; // En caso de que no se haya seleccionado ningún chip
                         }

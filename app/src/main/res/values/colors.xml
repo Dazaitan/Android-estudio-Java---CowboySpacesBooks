@@ -5,6 +5,5 @@
     <color name="primaryColor">#FFFFFFFF</color>
     <color name="secundaryColor">#FFFFFFFF</color>
     <color name="backgroundColor">#F6E8EA</color>
-    <color name="grayColor">#F6E8EA</color>
-    <color name="gray">#FFFFFFFF</color>
+    <color name="iconColor">#F6E8EA</color>
 </resources>
