@@ -7,12 +7,11 @@
     android:layout_height="match_parent"
     tools:context=".VistaPrevia">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/white"
+        android:background="@color/primaryColor"
         android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -99,18 +98,42 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="16dp" />
 
-            <!-- Botón flotante para agregar notas -->
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btn_add_note"
+            <!--botones compartidos-->
+            <LinearLayout
+                android:id="@+id/layout_shared_buttons"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_note_add"
+                android:orientation="horizontal"
+                android:padding="8dp"
                 app:layout_constraintBottom_toBottomOf="@id/iv_book_cover"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginBottom="-20dp"
                 android:layout_marginEnd="16dp"
-                app:backgroundTint="@color/white"
-                app:fabSize="mini" />
+                android:layout_marginBottom="-20dp">
+
+                <!-- Botón de cronómetro -->
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btn_timer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_timer"
+                    android:contentDescription="Cronómetro"
+                    app:fabSize="mini"
+                    app:backgroundTint="@color/white"
+                    android:tint="@color/black"
+                    android:layout_marginEnd="8dp"
+                    android:visibility="gone"/>
+
+                <!-- Botón de agregar nota -->
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/btn_add_note"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_note_add"
+                    android:contentDescription="Agregar nota"
+                    app:fabSize="mini"
+                    app:backgroundTint="@color/white"
+                    android:tint="@color/black" />
+            </LinearLayout>
 
             <!-- Sección de descripción -->
             <TextView
@@ -192,19 +215,10 @@
                     android:layout_marginStart="8dp" />
             </LinearLayout>
 
-            <!-- Botón de acción -->
-            <Button
-                android:id="@+id/btn_action"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Acción"
-                android:textAllCaps="false"
-                android:background="@drawable/rounded_button_background"
-                app:layout_constraintTop_toBottomOf="@id/layout_add_tags"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="16dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+
+    <!-- Contenedor para los botones compartidos en la misma posición del primer botón -->
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

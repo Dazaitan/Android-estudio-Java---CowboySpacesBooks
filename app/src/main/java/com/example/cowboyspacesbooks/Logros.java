@@ -2,6 +2,7 @@ package com.example.cowboyspacesbooks;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.activity.EdgeToEdge;
@@ -40,12 +41,26 @@ public class Logros extends AppCompatActivity {
             // Cargar datos de ejemplo
             bookList = new ArrayList<>();
             bookList.add(new Book("Noches blancas", "https://imagessl7.casadellibro.com/a/l/s5/47/9788416440047.webp"));
-            bookList.add(new Book("Almendra", String.valueOf(R.drawable.po_almendra)));
             // Agrega más libros según sea necesario
 
-            // Configura el adaptador
-            bookAdapter = new BookAdapter(this, bookList);
+            // Configurar el adaptador
+            bookAdapter = new BookAdapter(this,bookList);
             recyclerView.setAdapter(bookAdapter);
+            //Establecer el listener de clics
+            bookAdapter.setOnItemClickListener(new BookAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    Log.d("Logros","Ingreso al onclick del recycler");
+                    Book clickedBook = bookList.get(position);
+                    Intent intent = new Intent(Logros.this, VistaPrevia.class);
+                    intent.putExtra("titulo", clickedBook.getTitle());
+                    intent.putExtra("imagenUrl", clickedBook.getCoverImageUrl());
+
+                    // Agrega un extra para el contexto
+                    intent.putExtra("contexto", "pruebas"); // Cambia "value" por el nombre del contexto adecuado
+                    startActivity(intent);
+                }
+            });
 
             //Navegacion
             BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
