@@ -16,6 +16,9 @@
         android:theme="@style/Theme.CowboySpacesBooks"
         tools:targetApi="31">
         <activity
+            android:name=".VistaPrevia"
+            android:exported="false" />
+        <activity
             android:name=".AgregarLibro"
             android:exported="true" />
         <activity
