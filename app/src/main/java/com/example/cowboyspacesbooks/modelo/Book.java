@@ -2,7 +2,7 @@ package com.example.cowboyspacesbooks.modelo;
 
 public class Book {
     private String title;
-    private String coverImageUrl; // URL o path de la imagen de la portada
+    private String coverImageUrl;
 
     // Constructor
     public Book(String title, String coverImageUrl) {

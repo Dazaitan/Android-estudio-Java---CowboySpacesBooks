@@ -15,8 +15,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class AgregarLibro extends AppCompatActivity {
+import com.bumptech.glide.Glide;
+import com.example.cowboyspacesbooks.controlador.InsertarLibroTask;
+import com.google.android.material.chip.Chip;
+import com.google.android.material.chip.ChipGroup;
 
+public class AgregarLibro extends AppCompatActivity {
+    private String imageUrl = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,12 +30,14 @@ public class AgregarLibro extends AppCompatActivity {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            //Añadir URL de la imagen
             ImageView bookImage = findViewById(R.id.iv_book_image);
             bookImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     // Crear un EditText para ingresar la URL
-                    EditText inputUrl = new EditText(AgregarLibro.this);
+                    final EditText inputUrl = new EditText(AgregarLibro.this);
+
                     inputUrl.setHint("Ingrese la URL de la imagen");
 
                     // Crear el AlertDialog
@@ -41,11 +48,11 @@ public class AgregarLibro extends AppCompatActivity {
                             .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    String url = inputUrl.getText().toString().trim();
-                                    if (!url.isEmpty()) {
-                                        // Lógica para cargar la imagen desde la URL
-                                        Toast.makeText(AgregarLibro.this, "URL ingresada: " + url, Toast.LENGTH_SHORT).show();
+                                    imageUrl = inputUrl.getText().toString().trim();
+                                    if (!imageUrl.isEmpty()) {
+                                        //Toast.makeText(AgregarLibro.this, "URL ingresada: " + imageUrl, Toast.LENGTH_SHORT).show();
                                         // Aquí puedes usar una librería como Glide o Picasso para cargar la imagen
+                                        Glide.with(AgregarLibro.this).load(imageUrl).into(bookImage);
                                     } else {
                                         Toast.makeText(AgregarLibro.this, "Por favor, ingrese una URL válida", Toast.LENGTH_SHORT).show();
                                     }
@@ -59,14 +66,54 @@ public class AgregarLibro extends AppCompatActivity {
 
             //Remitir insercion de libro
             ImageButton btnSave = findViewById(R.id.btn_save);
-
+            EditText etTitulo = findViewById(R.id.et_title);
+            EditText etAutor = findViewById(R.id.et_author);
+            EditText etEditor = findViewById(R.id.et_editor);
+            EditText etIsbn = findViewById(R.id.et_isbn);
+            EditText etNumPaginas = findViewById(R.id.et_num_pages);
+            EditText etDescripcion = findViewById(R.id.et_description);
+            ChipGroup chipGroupBookType = findViewById(R.id.chip_group_book_type);
             // Configurar el OnClickListener
             btnSave.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Acción que quieres ejecutar cuando se haga clic en el botón
-                    Toast.makeText(AgregarLibro.this, "Botón Guardar clickeado", Toast.LENGTH_SHORT).show();
-                    // Aquí puedes agregar la lógica para guardar los datos o realizar otra acción
+                    String titulo = etTitulo.getText().toString().trim();
+                    String autor = etAutor.getText().toString().trim();
+                    String editor = etEditor.getText().toString().trim();
+                    String isbn = etIsbn.getText().toString().trim();
+                    String numPaginas = etNumPaginas.getText().toString().trim();
+                    String descripcion = etDescripcion.getText().toString().trim();
+
+                    // Capturar el chip seleccionado
+                    int selectedChipId = chipGroupBookType.getCheckedChipId();
+                    String bookType = "";
+                    if (isbn !=""){
+                        if (selectedChipId != View.NO_ID) {
+                            if (!imageUrl.isEmpty()) {
+                                Chip selectedChip = chipGroupBookType.findViewById(selectedChipId);
+                                bookType = selectedChip.getText().toString();
+                                //Llamar nueva tarea para la insercion a la base de datos
+                                new InsertarLibroTask(AgregarLibro.this).execute(titulo,autor,editor,isbn,numPaginas,descripcion,bookType,imageUrl);
+                                //Toast.makeText(AgregarLibro.this, "URL guardada: " + imageUrl, Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(AgregarLibro.this, "No se ha ingresado una URL", Toast.LENGTH_SHORT).show();
+                            }
+
+                        } else {
+                            bookType = "No seleccionado"; // En caso de que no se haya seleccionado ningún chip
+                        }
+                    } else {
+                        Toast.makeText(AgregarLibro.this, "No ha ingresado ISBN", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            // Referencia al botón btn_back
+            ImageButton btnBack = findViewById(R.id.btn_back);
+            // Configurar el OnClickListener para devolver a la página anterior
+            btnBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish(); // Cierra la actividad actual y vuelve a la anterior
                 }
             });
             return insets;
