@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.cowboyspacesbooks.modelo.Book;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -14,8 +15,13 @@ import androidx.core.view.WindowInsetsCompat;
 import android.view.View;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.MenuItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Home extends AppCompatActivity {
 
@@ -27,6 +33,22 @@ public class Home extends AppCompatActivity {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+
+            //CARGUE DE ICONOS PREVIEW DE MANERA HORIZONTAL
+            RecyclerView recyclerView = findViewById(R.id.iconPreview_recyclerView);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+            recyclerView.setLayoutManager(layoutManager);
+
+            List<Book> listaDeLibros = new ArrayList<>();
+            listaDeLibros.add(new Book("Noches blancas", "https://imagessl7.casadellibro.com/a/l/s5/47/9788416440047.webp"));
+            listaDeLibros.add(new Book("Almendra", "https://images.cdn2.buscalibre.com/fit-in/360x360/be/e2/bee26d4d07f382b1aee010b652eeb4ff.jpg"));
+            listaDeLibros.add(new Book("Almendra", "https://images.cdn2.buscalibre.com/fit-in/360x360/be/e2/bee26d4d07f382b1aee010b652eeb4ff.jpg"));
+            listaDeLibros.add(new Book("Almendra", "https://images.cdn2.buscalibre.com/fit-in/360x360/be/e2/bee26d4d07f382b1aee010b652eeb4ff.jpg"));
+            listaDeLibros.add(new Book("Almendra", "https://images.cdn2.buscalibre.com/fit-in/360x360/be/e2/bee26d4d07f382b1aee010b652eeb4ff.jpg"));
+
+            // Configura tu adaptador
+            BookAdapter adapter = new BookAdapter(this, listaDeLibros);
+            recyclerView.setAdapter(adapter);
 
             BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
             bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

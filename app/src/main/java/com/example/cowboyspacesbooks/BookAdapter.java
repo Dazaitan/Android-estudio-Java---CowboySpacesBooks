@@ -2,6 +2,7 @@ package com.example.cowboyspacesbooks;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,6 +45,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
         Book book = bookList.get(position);
+        holder.titleTextView.setText(book.getTitle());
         holder.bind(book);
     }
 
@@ -77,6 +79,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
         public void bind(Book book) {
             // Carga inicial de la imagen
+            Log.d("BookAdapter", "Título del libro: " + book.getTitle());
             Glide.with(context)
                     .load(book.getCoverImageUrl())
                     .placeholder(R.drawable.lo_cargando)

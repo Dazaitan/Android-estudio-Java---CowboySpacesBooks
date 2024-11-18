@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -17,6 +18,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.example.cowboyspacesbooks.vista.BarraInferiorHojaFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class VistaPrevia extends AppCompatActivity {
@@ -61,6 +63,16 @@ public class VistaPrevia extends AppCompatActivity {
             } else if ("pruebas".equals(contexto)){
                 Log.d("VistaPrevia", "Boton no habilitado");
             }
+
+            //Desplegar menu de gestion de libros inferior
+            ImageButton btnMenu = findViewById(R.id.btn_menu);
+            btnMenu.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    BarraInferiorHojaFragment bottomSheetFragment = new BarraInferiorHojaFragment();
+                    bottomSheetFragment.show(getSupportFragmentManager(), "BottomSheetDialog");
+                }
+            });
             return insets;
         });
     }
