@@ -12,6 +12,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Home extends AppCompatActivity {
-
+    private BookAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +50,22 @@ public class Home extends AppCompatActivity {
             // Configura tu adaptador
             BookAdapter adapter = new BookAdapter(this, listaDeLibros);
             recyclerView.setAdapter(adapter);
+
+            adapter.setOnItemClickListener(new BookAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(int position) {
+                    Log.d("Logros","Ingreso al onclick del recycler de Home");
+                    Book clickedBook = listaDeLibros.get(position);
+                    Intent intent = new Intent(Home.this, VistaPrevia.class);
+                    intent.putExtra("titulo", clickedBook.getTitle());
+                    intent.putExtra("imagenUrl", clickedBook.getCoverImageUrl());
+
+                    // Agrega un extra para el contexto
+                    intent.putExtra("contexto", "pruebas"); // Cambia "value" por el nombre del contexto adecuado
+                    startActivity(intent);
+                }
+            });
+
 
             BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
             bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {

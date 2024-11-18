@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ModoLectura">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/primaryColor"
+        android:padding="16dp">
+
+        <!-- Temporizador -->
+        <TextView
+            android:id="@+id/timer_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="00:00:00"
+            android:textSize="48sp"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="16dp"/>
+
+        <!-- Label de lectura -->
+        <TextView
+            android:id="@+id/label_read"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Leer..."
+            android:textSize="24sp"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center_horizontal"
+            android:paddingBottom="32dp"/>
+
+        <!-- Botón de pausa centrado -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/pause_button"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:src="@drawable/ic_pause"
+                android:background="?android:selectableItemBackground"
+                app:tint="@android:color/black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- Botón de cuenta regresiva -->
+        <Button
+            android:id="@+id/countdown_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Establecer cuenta regresiva"
+            android:textColor="@android:color/black"
+            android:background="@drawable/rounded_button_background"
+            android:layout_gravity="center_horizontal"
+            android:padding="8dp"/>
+
+        <!-- Detalles del libro -->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="24dp">
+
+            <ImageView
+                android:id="@+id/book_cover"
+                android:layout_width="64dp"
+                android:layout_height="96dp"
+                android:src="@drawable/ic_book_placeholder"
+                android:contentDescription="book_cover"/>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingStart="16dp">
+
+                <TextView
+                    android:id="@+id/book_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Memorias del Subsuelo"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"/>
+
+                <TextView
+                    android:id="@+id/book_author"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fiódor Dostoievski"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"/>
+
+                <TextView
+                    android:id="@+id/book_pages"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="pags. 7 / 178"
+                    android:textColor="@android:color/black"
+                    android:textSize="14sp"/>
+
+                <!-- Sección de notas con ImageButton a la derecha -->
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:paddingTop="4dp">
+
+                    <TextView
+                        android:id="@+id/notes_link"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="lista de notas"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:layout_marginEnd="4dp"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_add_note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="Agregar nota"
+                android:src="@drawable/ic_note_add"
+                android:tint="@color/black"
+                android:layout_marginStart="40dp"
+                app:backgroundTint="@color/white"
+                app:fabSize="mini" />
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

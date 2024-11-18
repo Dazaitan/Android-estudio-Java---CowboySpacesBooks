@@ -73,6 +73,16 @@ public class VistaPrevia extends AppCompatActivity {
                     bottomSheetFragment.show(getSupportFragmentManager(), "BottomSheetDialog");
                 }
             });
+
+            // Referencia al botón btn_back
+            ImageButton btnBack = findViewById(R.id.btn_back);
+            // Configurar el OnClickListener para devolver a la página anterior
+            btnBack.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish(); // Cierra la actividad actual y vuelve a la anterior
+                }
+            });
             return insets;
         });
     }

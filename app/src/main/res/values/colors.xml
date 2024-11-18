@@ -6,4 +6,5 @@
     <color name="secundaryColor">#FFFFFFFF</color>
     <color name="backgroundColor">#F6E8EA</color>
     <color name="iconColor">#F6E8EA</color>
+    <color name="blue">#99E1D9</color>
 </resources>

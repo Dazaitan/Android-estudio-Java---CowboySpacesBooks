@@ -12,6 +12,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.cowboyspacesbooks.controlador.RegisterTask;
+
 public class Registro extends AppCompatActivity {
     private EditText txtNombre,txtApellido,txtEmail,txtContrasena,txtCedula,txtContrasenaConfirmar;
     private Button btnRegistro;
