@@ -45,11 +45,10 @@ public class Home extends AppCompatActivity {
             recyclerView.setLayoutManager(layoutManager);
 
             List<Book> listaDeLibros = new ArrayList<>();
-            listaDeLibros.add(new Book("Noches blancas", "Editorial planeta", "Fiodor Dovtoyeski", "Tapa blanda", "descripcion", "Leido", 10000000, 200, "https://imagessl7.casadellibro.com/a/l/s5/47/9788416440047.webp"));
-            listaDeLibros.add(new Book("Almendra", "Editorial planeta", "Fiodor Dovtoyeski", "Tapa blanda", "descripcion", "Leido", 10000000, 200, "https://images.cdn2.buscalibre.com/fit-in/360x360/be/e2/bee26d4d07f382b1aee010b652eeb4ff.jpg"));
-            listaDeLibros.add(new Book("Almendra", "Editorial planeta", "Fiodor Dovtoyeski", "Tapa blanda", "descripcion", "Leido", 10000000, 200, "https://images.cdn2.buscalibre.com/fit-in/360x360/be/e2/bee26d4d07f382b1aee010b652eeb4ff.jpg"));
-            listaDeLibros.add(new Book("Almendra", "Editorial planeta", "Fiodor Dovtoyeski", "Tapa blanda", "descripcion", "Leido", 10000000, 200, "https://images.cdn2.buscalibre.com/fit-in/360x360/be/e2/bee26d4d07f382b1aee010b652eeb4ff.jpg"));
-            listaDeLibros.add(new Book("Almendra", "Editorial planeta", "Fiodor Dovtoyeski", "Tapa blanda", "descripcion", "Leido", 10000000, 200, "https://images.cdn2.buscalibre.com/fit-in/360x360/be/e2/bee26d4d07f382b1aee010b652eeb4ff.jpg"));
+            listaDeLibros.add(new Book("Noches blancas", "Editorial planeta", "Fiodor Dovtoyeski", "Tapa blanda", "descripcion", "Leido", 1432432, 200, "https://imagessl7.casadellibro.com/a/l/s5/47/9788416440047.webp"));
+            listaDeLibros.add(new Book("Almendra", "Editorial planeta", "Byun chul han", "Tapa blanda", "descripcion", "Leido", 10000000, 200, "https://images.cdn2.buscalibre.com/fit-in/360x360/be/e2/bee26d4d07f382b1aee010b652eeb4ff.jpg"));
+            listaDeLibros.add(new Book("Almendra", "Editorial planeta", "Byun chul han", "Tapa blanda", "descripcion", "Leido", 10000000, 200, "https://images.cdn2.buscalibre.com/fit-in/360x360/be/e2/bee26d4d07f382b1aee010b652eeb4ff.jpg"));
+            listaDeLibros.add(new Book("Almendra", "Editorial planeta", "Byun chul han", "Tapa blanda", "descripcion", "Leido", 10000000, 200, "https://images.cdn2.buscalibre.com/fit-in/360x360/be/e2/bee26d4d07f382b1aee010b652eeb4ff.jpg"));
 
             // Configura tu adaptador
             BookAdapter adapter = new BookAdapter(this, listaDeLibros);
@@ -63,6 +62,13 @@ public class Home extends AppCompatActivity {
                     Intent intent = new Intent(Home.this, VistaPrevia.class);
                     intent.putExtra("titulo", clickedBook.getTitulo());
                     intent.putExtra("imagenUrl", clickedBook.getCoverImageUrl());
+                    intent.putExtra("editorial", clickedBook.getEditorial());
+                    intent.putExtra("autor", clickedBook.getAutor());
+                    intent.putExtra("formato", clickedBook.getFormato());
+                    intent.putExtra("descripcion", clickedBook.getDescripcion());
+                    intent.putExtra("estado", clickedBook.getEstado());
+                    intent.putExtra("isbn", clickedBook.getIsbn());
+                    intent.putExtra("nPaginas", clickedBook.getnPaginas());
 
                     // Agrega un extra para el contexto
                     intent.putExtra("contexto", "pruebas"); // Cambia "value" por el nombre del contexto adecuado

@@ -43,6 +43,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
         Book book = bookList.get(position);
         holder.titleTextView.setText(book.getTitulo());
+        holder.autorPublisherTextView.setText(book.getAutor());
         holder.bind(book);
     }
 
@@ -54,11 +55,13 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     public class BookViewHolder extends RecyclerView.ViewHolder {
         private ImageView imageView;
         private TextView titleTextView;
+        private TextView autorPublisherTextView;
 
         public BookViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.book_cover);
             titleTextView = itemView.findViewById(R.id.book_title);
+            autorPublisherTextView =itemView.findViewById(R.id.tv_author_and_publisher);
 
             // Agrega el listener para capturar el clic
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -85,6 +88,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
             // Configura el título
             titleTextView.setText(book.getTitulo());
+            autorPublisherTextView.setText(book.getAutor());
         }
     }
 }

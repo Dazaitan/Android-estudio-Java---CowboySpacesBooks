@@ -59,6 +59,13 @@ public class Logros extends AppCompatActivity {
                     Intent intent = new Intent(Logros.this, VistaPrevia.class);
                     intent.putExtra("titulo", clickedBook.getTitulo());
                     intent.putExtra("imagenUrl", clickedBook.getCoverImageUrl());
+                    intent.putExtra("editorial", clickedBook.getEditorial());
+                    intent.putExtra("autor", clickedBook.getAutor());
+                    intent.putExtra("formato", clickedBook.getFormato());
+                    intent.putExtra("descripcion", clickedBook.getDescripcion());
+                    intent.putExtra("estado", clickedBook.getEstado());
+                    intent.putExtra("isbn", clickedBook.getIsbn());
+                    intent.putExtra("nPaginas", clickedBook.getnPaginas());
 
                     // Agrega un extra para el contexto
                     intent.putExtra("contexto", "logros"); // Cambia "value" por el nombre del contexto adecuado

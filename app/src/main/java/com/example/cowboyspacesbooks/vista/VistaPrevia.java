@@ -31,16 +31,19 @@ public class VistaPrevia extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             LinearLayout layoutSharedButtons = findViewById(R.id.layout_shared_buttons);
             TextView tituloTextView = findViewById(R.id.tv_book_title);
+            TextView tv_author_publisher = findViewById(R.id.tv_author_and_publisher);
             ImageView imagenImageView = findViewById(R.id.iv_book_cover);
             FloatingActionButton btnAddNote = findViewById(R.id.btn_add_note);
             // Obtén los extras del Intent
             String titulo = getIntent().getStringExtra("titulo");
             String imagenUrl = getIntent().getStringExtra("imagenUrl");
+            String tv_autor_editorial = getIntent().getStringExtra("autor");
             String contexto = getIntent().getStringExtra("contexto");
 
             // Configura los datos en la vista
             if (titulo != null) {
                 tituloTextView.setText(titulo);
+                tv_author_publisher.setText(tv_autor_editorial);
             }
 
             if (imagenUrl != null) {
