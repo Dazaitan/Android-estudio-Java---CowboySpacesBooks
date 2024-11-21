@@ -1,4 +1,4 @@
-package com.example.cowboyspacesbooks;
+package com.example.cowboyspacesbooks.vista;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +13,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.cowboyspacesbooks.BookAdapter;
+import com.example.cowboyspacesbooks.Home;
+import com.example.cowboyspacesbooks.R;
 import com.example.cowboyspacesbooks.modelo.Book;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -40,7 +44,7 @@ public class Logros extends AppCompatActivity {
 
             // Cargar datos de ejemplo
             bookList = new ArrayList<>();
-            bookList.add(new Book("Noches blancas", "https://imagessl7.casadellibro.com/a/l/s5/47/9788416440047.webp"));
+            bookList.add(new Book("Noches blancas","Editorial planeta", "Fiodor Dovtoyeski", "Tapa blanda", "descripcion", "Leido", 10000000, 200, "https://imagessl7.casadellibro.com/a/l/s5/47/9788416440047.webp"));
             // Agrega más libros según sea necesario
 
             // Configurar el adaptador
@@ -53,7 +57,7 @@ public class Logros extends AppCompatActivity {
                     Log.d("Logros","Ingreso al onclick del recycler");
                     Book clickedBook = bookList.get(position);
                     Intent intent = new Intent(Logros.this, VistaPrevia.class);
-                    intent.putExtra("titulo", clickedBook.getTitle());
+                    intent.putExtra("titulo", clickedBook.getTitulo());
                     intent.putExtra("imagenUrl", clickedBook.getCoverImageUrl());
 
                     // Agrega un extra para el contexto

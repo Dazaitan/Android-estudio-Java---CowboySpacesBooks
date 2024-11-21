@@ -1,15 +1,12 @@
 package com.example.cowboyspacesbooks;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import com.bumptech.glide.Glide;
@@ -45,7 +42,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     @Override
     public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
         Book book = bookList.get(position);
-        holder.titleTextView.setText(book.getTitle());
+        holder.titleTextView.setText(book.getTitulo());
         holder.bind(book);
     }
 
@@ -79,7 +76,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
         public void bind(Book book) {
             // Carga inicial de la imagen
-            Log.d("BookAdapter", "Título del libro: " + book.getTitle());
+            Log.d("BookAdapter", "Título del libro: " + book.getTitulo());
             Glide.with(context)
                     .load(book.getCoverImageUrl())
                     .placeholder(R.drawable.lo_cargando)
@@ -87,7 +84,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
                     .into(imageView);
 
             // Configura el título
-            titleTextView.setText(book.getTitle());
+            titleTextView.setText(book.getTitulo());
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.cowboyspacesbooks;
+package com.example.cowboyspacesbooks.vista;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -17,6 +17,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.example.cowboyspacesbooks.R;
 import com.example.cowboyspacesbooks.controlador.AgregarLibroListaTask;
 import com.example.cowboyspacesbooks.controlador.InsertarLibroTask;
 import com.google.android.material.chip.Chip;

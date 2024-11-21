@@ -1,4 +1,4 @@
-package com.example.cowboyspacesbooks;
+package com.example.cowboyspacesbooks.vista;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.annotation.NonNull;
+
+import com.example.cowboyspacesbooks.Home;
+import com.example.cowboyspacesbooks.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Memorizar extends AppCompatActivity {

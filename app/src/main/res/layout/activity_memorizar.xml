@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
-    tools:context=".Memorizar">
+    tools:context=".vista.Memorizar">
 
     <!-- Header con título y búsqueda -->
     <View

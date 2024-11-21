@@ -3,18 +3,26 @@ package com.example.cowboyspacesbooks.modelo;
 import java.io.Serializable;
 
 public class Book implements Serializable {
-    private String title;
-    private String coverImageUrl;
-
+    private String titulo,editorial,autor,formato,descripcion,estado;
+    private long isbn;
+    private int nPaginas;
+    private String coverImageUrl;//portada
     // Constructor
-    public Book(String title, String coverImageUrl) {
-        this.title = title;
+    public Book(String title, String editorial, String autor, String formato, String descripcion, String estado, long isbn, int nPaginas, String coverImageUrl) {
+        this.titulo = title;
+        this.editorial = editorial;
+        this.autor = autor;
+        this.formato = formato;
+        this.descripcion = descripcion;
+        this.estado = estado;
+        this.isbn = isbn;
+        this.nPaginas = nPaginas;
         this.coverImageUrl = coverImageUrl;
     }
 
     // Getters
-    public String getTitle() {
-        return title;
+    public String getTitulo() {
+        return titulo;
     }
 
     public String getCoverImageUrl() {
@@ -22,8 +30,8 @@ public class Book implements Serializable {
     }
 
     // Setters (opcional, si necesitas cambiar los valores)
-    public void setTitle(String title) {
-        this.title = title;
+    public void setTitulo(String title) {
+        this.titulo = titulo;
     }
 
     public void setCoverImageUrl(String coverImageUrl) {

@@ -16,28 +16,31 @@
         android:theme="@style/Theme.CowboySpacesBooks"
         tools:targetApi="31">
         <activity
-            android:name=".vista.BarraInferiorGestionNotas"
-            android:exported="false" />
-        <activity
-            android:name=".GestionNotasLayout"
+            android:name=".vista.SesionLectura"
             android:exported="true" />
         <activity
-            android:name=".ModoLectura"
+            android:name=".vista.BarraInferiorGestionNotas"
+            android:exported="true" />
+        <activity
+            android:name=".vista.GestionNotasLayout"
+            android:exported="true" />
+        <activity
+            android:name=".vista.ModoLectura"
             android:exported="true" />
         <activity
             android:name=".vista.BarraInferiorGestionLibros"
             android:exported="false" />
         <activity
-            android:name=".VistaPrevia"
+            android:name=".vista.VistaPrevia"
             android:exported="true" />
         <activity
-            android:name=".AgregarLibro"
+            android:name=".vista.AgregarLibro"
             android:exported="false" />
         <activity
-            android:name=".Logros"
+            android:name=".vista.Logros"
             android:exported="true" />
         <activity
-            android:name=".Memorizar"
+            android:name=".vista.Memorizar"
             android:exported="false" />
         <activity
             android:name=".Home"

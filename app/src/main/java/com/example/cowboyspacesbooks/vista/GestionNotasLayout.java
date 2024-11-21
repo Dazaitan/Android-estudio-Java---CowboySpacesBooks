@@ -1,4 +1,4 @@
-package com.example.cowboyspacesbooks;
+package com.example.cowboyspacesbooks.vista;
 
 import android.graphics.drawable.Drawable;
 import android.media.Image;
@@ -14,6 +14,8 @@ import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.cowboyspacesbooks.R;
 import com.example.cowboyspacesbooks.vista.BarraInferiorGestionNotas;
 
 public class GestionNotasLayout extends AppCompatActivity implements BarraInferiorGestionNotas.OnOptionSelectedListener {

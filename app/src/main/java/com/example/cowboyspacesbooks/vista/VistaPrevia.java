@@ -1,4 +1,4 @@
-package com.example.cowboyspacesbooks;
+package com.example.cowboyspacesbooks.vista;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,18 +8,15 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
-import com.example.cowboyspacesbooks.modelo.Book;
-import com.example.cowboyspacesbooks.vista.BarraInferiorHojaFragment;
+import com.example.cowboyspacesbooks.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class VistaPrevia extends AppCompatActivity {

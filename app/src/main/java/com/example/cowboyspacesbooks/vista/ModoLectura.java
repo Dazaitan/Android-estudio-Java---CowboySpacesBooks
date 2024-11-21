@@ -1,4 +1,4 @@
-package com.example.cowboyspacesbooks;
+package com.example.cowboyspacesbooks.vista;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.example.cowboyspacesbooks.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class ModoLectura extends AppCompatActivity {
@@ -42,6 +43,7 @@ public class ModoLectura extends AppCompatActivity {
                     startActivity(new Intent(ModoLectura.this, GestionNotasLayout.class));
                 }
             });
+
             pauseButton = findViewById(R.id.pause_button);
             timerTextView = findViewById(R.id.timer_text);
             // Configurar el evento OnClickListener para intercalar imagenes cuando se presione el boton de pausar y play
@@ -65,9 +67,9 @@ public class ModoLectura extends AppCompatActivity {
             startTime = System.currentTimeMillis();
             handler.postDelayed(updateTimerThread, 0);
 
+            //Captura de datos del intent donde se desencadena el evento
             TextView bookTitle = findViewById(R.id.book_title);
             ImageView bookCover = findViewById(R.id.book_cover);
-
             // Recibir los datos del Intent y cargarlos en la interfaz
             Intent intent = getIntent();
             if (intent != null) {
@@ -87,6 +89,15 @@ public class ModoLectura extends AppCompatActivity {
                             .into(bookCover);
                 }
             }
+
+            //Configuracion de confirmacion de vista
+            ImageButton btnConfirmar = findViewById(R.id.confirm_button);
+            btnConfirmar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
             ImageButton btnBack = findViewById(R.id.cancel_button);
             // Configurar el OnClickListener para devolver a la página anterior
             btnBack.setOnClickListener(new View.OnClickListener() {

@@ -7,6 +7,10 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cowboyspacesbooks.modelo.Book;
+import com.example.cowboyspacesbooks.vista.AgregarLibro;
+import com.example.cowboyspacesbooks.vista.Logros;
+import com.example.cowboyspacesbooks.vista.Memorizar;
+import com.example.cowboyspacesbooks.vista.VistaPrevia;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -14,7 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,11 +45,11 @@ public class Home extends AppCompatActivity {
             recyclerView.setLayoutManager(layoutManager);
 
             List<Book> listaDeLibros = new ArrayList<>();
-            listaDeLibros.add(new Book("Noches blancas", "https://imagessl7.casadellibro.com/a/l/s5/47/9788416440047.webp"));
-            listaDeLibros.add(new Book("Almendra", "https://images.cdn2.buscalibre.com/fit-in/360x360/be/e2/bee26d4d07f382b1aee010b652eeb4ff.jpg"));
-            listaDeLibros.add(new Book("Almendra", "https://images.cdn2.buscalibre.com/fit-in/360x360/be/e2/bee26d4d07f382b1aee010b652eeb4ff.jpg"));
-            listaDeLibros.add(new Book("Almendra", "https://images.cdn2.buscalibre.com/fit-in/360x360/be/e2/bee26d4d07f382b1aee010b652eeb4ff.jpg"));
-            listaDeLibros.add(new Book("Almendra", "https://images.cdn2.buscalibre.com/fit-in/360x360/be/e2/bee26d4d07f382b1aee010b652eeb4ff.jpg"));
+            listaDeLibros.add(new Book("Noches blancas", "Editorial planeta", "Fiodor Dovtoyeski", "Tapa blanda", "descripcion", "Leido", 10000000, 200, "https://imagessl7.casadellibro.com/a/l/s5/47/9788416440047.webp"));
+            listaDeLibros.add(new Book("Almendra", "Editorial planeta", "Fiodor Dovtoyeski", "Tapa blanda", "descripcion", "Leido", 10000000, 200, "https://images.cdn2.buscalibre.com/fit-in/360x360/be/e2/bee26d4d07f382b1aee010b652eeb4ff.jpg"));
+            listaDeLibros.add(new Book("Almendra", "Editorial planeta", "Fiodor Dovtoyeski", "Tapa blanda", "descripcion", "Leido", 10000000, 200, "https://images.cdn2.buscalibre.com/fit-in/360x360/be/e2/bee26d4d07f382b1aee010b652eeb4ff.jpg"));
+            listaDeLibros.add(new Book("Almendra", "Editorial planeta", "Fiodor Dovtoyeski", "Tapa blanda", "descripcion", "Leido", 10000000, 200, "https://images.cdn2.buscalibre.com/fit-in/360x360/be/e2/bee26d4d07f382b1aee010b652eeb4ff.jpg"));
+            listaDeLibros.add(new Book("Almendra", "Editorial planeta", "Fiodor Dovtoyeski", "Tapa blanda", "descripcion", "Leido", 10000000, 200, "https://images.cdn2.buscalibre.com/fit-in/360x360/be/e2/bee26d4d07f382b1aee010b652eeb4ff.jpg"));
 
             // Configura tu adaptador
             BookAdapter adapter = new BookAdapter(this, listaDeLibros);
@@ -57,7 +61,7 @@ public class Home extends AppCompatActivity {
                     Log.d("Logros","Ingreso al onclick del recycler de Home");
                     Book clickedBook = listaDeLibros.get(position);
                     Intent intent = new Intent(Home.this, VistaPrevia.class);
-                    intent.putExtra("titulo", clickedBook.getTitle());
+                    intent.putExtra("titulo", clickedBook.getTitulo());
                     intent.putExtra("imagenUrl", clickedBook.getCoverImageUrl());
 
                     // Agrega un extra para el contexto
