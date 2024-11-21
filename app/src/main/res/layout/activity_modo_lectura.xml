@@ -36,11 +36,25 @@
             android:layout_gravity="center_horizontal"
             android:paddingBottom="32dp"/>
 
-        <!-- Botón de pausa centrado -->
+        <!-- Botones de acción con botón de pausa en el centro -->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp">
 
+            <!-- Botón de cancelar -->
+            <ImageButton
+                android:id="@+id/cancel_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_arrow_back"
+                android:background="?android:selectableItemBackground"
+                app:tint="@android:color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <!-- Botón de pausa -->
             <ImageButton
                 android:id="@+id/pause_button"
                 android:layout_width="64dp"
@@ -50,9 +64,23 @@
                 app:tint="@android:color/black"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintStart_toEndOf="@id/cancel_button"
+                app:layout_constraintEnd_toStartOf="@id/confirm_button"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"/>
+
+            <!-- Botón de confirmar -->
+            <ImageButton
+                android:id="@+id/confirm_button"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_check"
+                android:background="?android:selectableItemBackground"
+                app:tint="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- Botón de cuenta regresiva -->
         <Button
@@ -143,5 +171,6 @@
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 

@@ -1,6 +1,8 @@
 package com.example.cowboyspacesbooks.modelo;
 
-public class Book {
+import java.io.Serializable;
+
+public class Book implements Serializable {
     private String title;
     private String coverImageUrl;
 

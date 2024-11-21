@@ -2,9 +2,6 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="AgregarLibro">
-        <State />
-      </entry>
       <entry key="GestionNotasLayout">
         <State />
       </entry>
@@ -12,6 +9,9 @@
         <State />
       </entry>
       <entry key="Logros (1)">
+        <State />
+      </entry>
+      <entry key="ModoLectura">
         <State />
       </entry>
       <entry key="VistaPrevia">

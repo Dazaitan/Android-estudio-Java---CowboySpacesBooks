@@ -23,7 +23,7 @@
             android:exported="true" />
         <activity
             android:name=".ModoLectura"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".vista.BarraInferiorGestionLibros"
             android:exported="false" />

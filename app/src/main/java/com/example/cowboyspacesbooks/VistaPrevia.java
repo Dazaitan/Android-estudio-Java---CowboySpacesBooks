@@ -18,10 +18,12 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
+import com.example.cowboyspacesbooks.modelo.Book;
 import com.example.cowboyspacesbooks.vista.BarraInferiorHojaFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class VistaPrevia extends AppCompatActivity {
+    private FloatingActionButton btnAddNote;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,10 +35,7 @@ public class VistaPrevia extends AppCompatActivity {
             LinearLayout layoutSharedButtons = findViewById(R.id.layout_shared_buttons);
             TextView tituloTextView = findViewById(R.id.tv_book_title);
             ImageView imagenImageView = findViewById(R.id.iv_book_cover);
-            FloatingActionButton btnTimer = findViewById(R.id.btn_timer);
             FloatingActionButton btnAddNote = findViewById(R.id.btn_add_note);
-            // Oculta inicialmente el segundo botón
-            btnTimer.setVisibility(View.GONE);
             // Obtén los extras del Intent
             String titulo = getIntent().getStringExtra("titulo");
             String imagenUrl = getIntent().getStringExtra("imagenUrl");
@@ -54,9 +53,21 @@ public class VistaPrevia extends AppCompatActivity {
                         .error(R.drawable.error_image)
                         .into(imagenImageView);
             }
+            //Configuracion de boton btnTimer
+            FloatingActionButton btnTimer = findViewById(R.id.btn_timer);
+            btnTimer.setVisibility(View.GONE);// Oculta inicialmente el segundo botón
 
-            // Verifica el contexto y muestra/oculta el segundo botón
-            if ("logros".equals(contexto)) {
+            btnTimer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Abrir el modo lectura
+                    Intent intent = new Intent(VistaPrevia.this, ModoLectura.class);
+                    intent.putExtra("titulo", titulo);
+                    intent.putExtra("imagenUrl", imagenUrl);
+                    startActivity(intent);
+                }
+            });
+            if ("logros".equals(contexto)) {// Verifica el contexto y muestra oculta el segundo botón
                 Log.d("VistaPrevia","Ingreso a la actividad");
                 // Muestra el segundo botón si el contexto es "logros"
                 btnTimer.setVisibility(View.VISIBLE);
@@ -74,6 +85,14 @@ public class VistaPrevia extends AppCompatActivity {
                 }
             });
 
+            //Boton para añadir notas
+            btnAddNote = findViewById(R.id.btn_add_note);
+            btnAddNote.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(VistaPrevia.this, GestionNotasLayout.class));
+                }
+            });
             // Referencia al botón btn_back
             ImageButton btnBack = findViewById(R.id.btn_back);
             // Configurar el OnClickListener para devolver a la página anterior

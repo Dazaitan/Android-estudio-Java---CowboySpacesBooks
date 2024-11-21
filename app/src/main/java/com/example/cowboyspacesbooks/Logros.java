@@ -57,7 +57,7 @@ public class Logros extends AppCompatActivity {
                     intent.putExtra("imagenUrl", clickedBook.getCoverImageUrl());
 
                     // Agrega un extra para el contexto
-                    intent.putExtra("contexto", "pruebas"); // Cambia "value" por el nombre del contexto adecuado
+                    intent.putExtra("contexto", "logros"); // Cambia "value" por el nombre del contexto adecuado
                     startActivity(intent);
                 }
             });
