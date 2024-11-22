@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
+    android:id="@+id/main"
     tools:context=".vista.SesionLectura">
 
     <!-- Botón de regresar -->
@@ -55,7 +56,7 @@
 
     <!-- Descripción -->
     <TextView
-        android:id="@+id/tv_description"
+        android:id="@+id/tv_descripcion"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="Por favor, compruebe el contenido que desea guardar."
@@ -70,14 +71,14 @@
 
     <!-- Fecha y hora -->
     <TextView
-        android:id="@+id/tv_date_time"
+        android:id="@+id/tv_fecha_tiempo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="20/11/2024 21:08"
         android:textSize="16sp"
         android:textColor="@android:color/darker_gray"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_description"
+        app:layout_constraintTop_toBottomOf="@id/tv_descripcion"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp" />
 
@@ -91,7 +92,7 @@
         android:padding="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_date_time"
+        app:layout_constraintTop_toBottomOf="@id/tv_fecha_tiempo"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp">
@@ -116,7 +117,7 @@
 
     <!-- Contenedor de páginas -->
     <LinearLayout
-        android:id="@+id/container_pages"
+        android:id="@+id/contenedor_paginas"
         android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -136,20 +137,23 @@
             android:text="Leer páginas"
             android:textSize="16sp"
             android:textColor="@android:color/darker_gray" />
-
-        <TextView
-            android:id="@+id/tv_pages"
+        <!--Actualizar las pags de acuerdo a los datos en la base de datos-->
+        <Button
+            android:id="@+id/btn_leer_paginas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="pags. 7 / 178"
+            android:text=""
             android:textSize="24sp"
             android:textColor="@android:color/black"
-            android:layout_marginTop="8dp" />
+            android:layout_marginTop="8dp"
+            android:background="?attr/selectableItemBackground"
+            android:padding="8dp"
+            android:gravity="center" />
     </LinearLayout>
 
     <!-- Contenedor de estado -->
     <LinearLayout
-        android:id="@+id/container_status"
+        android:id="@+id/contenedor_estado"
         android:orientation="vertical"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -157,13 +161,13 @@
         android:padding="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/container_pages"
+        app:layout_constraintTop_toBottomOf="@id/contenedor_paginas"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp">
 
         <TextView
-            android:id="@+id/tv_status_label"
+            android:id="@+id/tv_status_etiqueta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Estado"
@@ -171,7 +175,7 @@
             android:textColor="@android:color/darker_gray" />
 
         <TextView
-            android:id="@+id/tv_status"
+            android:id="@+id/tv_estado"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Leer ahora"

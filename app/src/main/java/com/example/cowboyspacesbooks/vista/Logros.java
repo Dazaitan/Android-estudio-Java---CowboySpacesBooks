@@ -44,7 +44,7 @@ public class Logros extends AppCompatActivity {
 
             // Cargar datos de ejemplo
             bookList = new ArrayList<>();
-            bookList.add(new Book("Noches blancas","Editorial planeta", "Fiodor Dovtoyeski", "Tapa blanda", "descripcion", "Leido", 10000000, 200, "https://imagessl7.casadellibro.com/a/l/s5/47/9788416440047.webp"));
+            bookList.add(new Book("Noches blancas", 10000000, "https://imagessl7.casadellibro.com/a/l/s5/47/9788416440047.webp"));
             // Agrega más libros según sea necesario
 
             // Configurar el adaptador
@@ -59,13 +59,7 @@ public class Logros extends AppCompatActivity {
                     Intent intent = new Intent(Logros.this, VistaPrevia.class);
                     intent.putExtra("titulo", clickedBook.getTitulo());
                     intent.putExtra("imagenUrl", clickedBook.getCoverImageUrl());
-                    intent.putExtra("editorial", clickedBook.getEditorial());
-                    intent.putExtra("autor", clickedBook.getAutor());
-                    intent.putExtra("formato", clickedBook.getFormato());
-                    intent.putExtra("descripcion", clickedBook.getDescripcion());
-                    intent.putExtra("estado", clickedBook.getEstado());
                     intent.putExtra("isbn", clickedBook.getIsbn());
-                    intent.putExtra("nPaginas", clickedBook.getnPaginas());
 
                     // Agrega un extra para el contexto
                     intent.putExtra("contexto", "logros"); // Cambia "value" por el nombre del contexto adecuado

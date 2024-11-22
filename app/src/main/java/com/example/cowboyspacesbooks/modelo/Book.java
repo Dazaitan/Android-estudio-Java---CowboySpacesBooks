@@ -6,8 +6,18 @@ public class Book implements Serializable {
     private String titulo,editorial,autor,formato,descripcion,estado;
     private long isbn;
     private int nPaginas;
-    private String coverImageUrl;//portada
+    private String portada;//portada
     // Constructor
+
+    public Book() {
+    }
+
+    public Book(String titulo, long isbn, String coverImageUrl) {
+        this.titulo = titulo;
+        this.isbn = isbn;
+        this.portada = coverImageUrl;
+    }
+
     public Book(String title, String editorial, String autor, String formato, String descripcion, String estado, long isbn, int nPaginas, String coverImageUrl) {
         this.titulo = title;
         this.editorial = editorial;
@@ -17,7 +27,7 @@ public class Book implements Serializable {
         this.estado = estado;
         this.isbn = isbn;
         this.nPaginas = nPaginas;
-        this.coverImageUrl = coverImageUrl;
+        this.portada = coverImageUrl;
     }
 
     // Getters
@@ -26,7 +36,7 @@ public class Book implements Serializable {
     }
 
     public String getCoverImageUrl() {
-        return coverImageUrl;
+        return portada;
     }
 
     // Setters (opcional, si necesitas cambiar los valores)
@@ -35,7 +45,7 @@ public class Book implements Serializable {
     }
 
     public void setCoverImageUrl(String coverImageUrl) {
-        this.coverImageUrl = coverImageUrl;
+        this.portada = coverImageUrl;
     }
 
     public String getEditorial() {

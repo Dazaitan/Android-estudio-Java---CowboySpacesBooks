@@ -79,7 +79,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
 
         public void bind(Book book) {
             // Carga inicial de la imagen
-            Log.d("BookAdapter", "Título del libro: " + book.getTitulo());
+            Log.d("BookAdapter", "Portada del libro: " + book.getCoverImageUrl());
             Glide.with(context)
                     .load(book.getCoverImageUrl())
                     .placeholder(R.drawable.lo_cargando)

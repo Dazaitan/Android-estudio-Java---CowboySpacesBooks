@@ -2,9 +2,6 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="GestionNotasLayout">
-        <State />
-      </entry>
       <entry key="Home">
         <State />
       </entry>
@@ -12,6 +9,9 @@
         <State />
       </entry>
       <entry key="ModoLectura">
+        <State />
+      </entry>
+      <entry key="SesionLectura">
         <State />
       </entry>
       <entry key="VistaPrevia">
