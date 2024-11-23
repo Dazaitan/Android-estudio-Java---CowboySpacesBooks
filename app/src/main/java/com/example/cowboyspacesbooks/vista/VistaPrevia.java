@@ -18,7 +18,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.cowboyspacesbooks.R;
-import com.example.cowboyspacesbooks.controlador.IGetDetallesLibro;
+import com.example.cowboyspacesbooks.controlador.ApiService;
 import com.example.cowboyspacesbooks.controlador.RetrofitClient;
 import com.example.cowboyspacesbooks.modelo.Book;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -69,7 +69,7 @@ public class VistaPrevia extends AppCompatActivity {
         });
     }
     private void cargarDetallesLibroAPI(String isbn, String imagenUrl, String contexto) {
-        IGetDetallesLibro bookApi = RetrofitClient.getClient().create(IGetDetallesLibro.class);
+        ApiService bookApi = RetrofitClient.getClient().create(ApiService.class);
         FloatingActionButton btnTimer = findViewById(R.id.btn_timer);
         //btnTimer.setVisibility(View.GONE);
         bookApi.obtenerDetallesLibros(isbn).enqueue(new Callback<List<Book>>() {

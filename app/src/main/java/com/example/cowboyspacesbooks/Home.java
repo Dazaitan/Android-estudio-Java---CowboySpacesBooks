@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.cowboyspacesbooks.controlador.IGetListaLibros;
+import com.example.cowboyspacesbooks.controlador.ApiService;
 import com.example.cowboyspacesbooks.controlador.RetrofitClient;
 import com.example.cowboyspacesbooks.modelo.Book;
 import com.example.cowboyspacesbooks.vista.AgregarLibro;
@@ -28,14 +28,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Home extends AppCompatActivity {
     private BookAdapter adapter;
@@ -101,7 +98,7 @@ public class Home extends AppCompatActivity {
         });
     }
     private void cargarLibrosDesdeServidor() {
-        IGetListaLibros bookApi = RetrofitClient.getClient().create(IGetListaLibros.class);
+        ApiService bookApi = RetrofitClient.getClient().create(ApiService.class);
 
         bookApi.obtenerLibros().enqueue(new Callback<List<Book>>() {
             @Override

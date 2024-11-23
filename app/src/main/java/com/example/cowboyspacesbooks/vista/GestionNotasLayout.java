@@ -2,7 +2,6 @@ package com.example.cowboyspacesbooks.vista;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,7 +17,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.cowboyspacesbooks.R;
-import com.example.cowboyspacesbooks.controlador.IPostNotas;
+import com.example.cowboyspacesbooks.controlador.ApiService;
 import com.example.cowboyspacesbooks.controlador.RetrofitClient;
 import com.example.cowboyspacesbooks.modelo.Notes;
 
@@ -75,7 +74,7 @@ public class GestionNotasLayout extends AppCompatActivity implements BarraInferi
         });
     }
     private void insertarNota(String isbn, String tipoNota, String cuerpo, String pagInicio, String pagFinal) {
-        IPostNotas noteApi = RetrofitClient.getClient().create(IPostNotas.class);
+        ApiService noteApi = RetrofitClient.getClient().create(ApiService.class);
         Notes note = new Notes(isbn,tipoNota,cuerpo,Integer.parseInt(pagInicio),Integer.parseInt(pagFinal));
         Call<Void> call = noteApi.insertarNota(note);
         call.enqueue(new Callback<Void>() {

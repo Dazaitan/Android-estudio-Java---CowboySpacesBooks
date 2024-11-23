@@ -18,13 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cowboyspacesbooks.BookAdapter;
 import com.example.cowboyspacesbooks.Home;
 import com.example.cowboyspacesbooks.R;
-import com.example.cowboyspacesbooks.controlador.IGetListaLibros;
-import com.example.cowboyspacesbooks.controlador.IgetLibrosLeidos;
+import com.example.cowboyspacesbooks.controlador.ApiService;
 import com.example.cowboyspacesbooks.controlador.RetrofitClient;
 import com.example.cowboyspacesbooks.modelo.Book;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -71,8 +69,7 @@ public class Logros extends AppCompatActivity {
 
     }
     private void cargarLibrosDesdeServidor(String estado) {
-        IgetLibrosLeidos bookApi = RetrofitClient.getClient().create(IgetLibrosLeidos.class);
-
+        ApiService bookApi = RetrofitClient.getClient().create(ApiService.class);
         bookApi.obtenerLibrosLeidos(estado).enqueue(new Callback<List<Book>>() {
             @Override
             public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
