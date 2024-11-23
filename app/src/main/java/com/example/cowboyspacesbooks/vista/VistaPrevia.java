@@ -77,7 +77,7 @@ public class VistaPrevia extends AppCompatActivity {
             public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Book> listaDeLibros = response.body();
-
+                    Log.d("VistaPrevia","Ingreso");
                     Book libro = listaDeLibros.get(0);
                     TextView tituloTextView = findViewById(R.id.tv_book_title);
                     TextView tvAuthorPublisher = findViewById(R.id.tv_author_and_publisher);
@@ -124,7 +124,9 @@ public class VistaPrevia extends AppCompatActivity {
                     btnAddNote.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            startActivity(new Intent(VistaPrevia.this, GestionNotasLayout.class));
+                            Intent intent =new Intent(VistaPrevia.this, GestionNotasLayout.class);
+                            intent.putExtra("isbn",libro.getIsbn());
+                            startActivity(intent);
                         }
                     });
                 } else {

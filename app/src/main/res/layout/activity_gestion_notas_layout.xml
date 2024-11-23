@@ -72,7 +72,7 @@
 
         <!-- EditText for page range -->
         <EditText
-            android:id="@+id/edt_page_start"
+            android:id="@+id/edt_pagina_inicio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Pág. ini"
@@ -83,7 +83,7 @@
             android:textSize="14sp"
             android:background="@drawable/edit_text_background" />
         <EditText
-            android:id="@+id/edt_page_end"
+            android:id="@+id/edt_pagina_final"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Pág. ter"
@@ -110,7 +110,7 @@
 
     <!-- Note input field -->
     <EditText
-        android:id="@+id/edt_notes"
+        android:id="@+id/edt_note_body"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
