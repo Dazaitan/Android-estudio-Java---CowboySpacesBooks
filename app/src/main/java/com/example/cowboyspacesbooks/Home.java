@@ -7,6 +7,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cowboyspacesbooks.controlador.IGetListaLibros;
+import com.example.cowboyspacesbooks.controlador.RetrofitClient;
 import com.example.cowboyspacesbooks.modelo.Book;
 import com.example.cowboyspacesbooks.vista.AgregarLibro;
 import com.example.cowboyspacesbooks.vista.Logros;
@@ -100,19 +101,13 @@ public class Home extends AppCompatActivity {
         });
     }
     private void cargarLibrosDesdeServidor() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.100.5/cowboyspacesbooks/") // Cambia esto por tu URL base
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        IGetListaLibros bookApi = retrofit.create(IGetListaLibros.class);
+        IGetListaLibros bookApi = RetrofitClient.getClient().create(IGetListaLibros.class);
 
         bookApi.obtenerLibros().enqueue(new Callback<List<Book>>() {
             @Override
             public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Book> listaDeLibros = response.body();
-
                     // Configura el adaptador con los datos recibidos
                     RecyclerView recyclerView = findViewById(R.id.iconPreview_recyclerView);
                     adapter = new BookAdapter(Home.this, listaDeLibros);

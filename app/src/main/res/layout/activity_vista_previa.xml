@@ -121,7 +121,7 @@
                     app:backgroundTint="@color/white"
                     android:tint="@color/black"
                     android:layout_marginEnd="8dp"
-                    android:visibility="gone"/>
+                    />
 
                 <!-- Botón de agregar nota -->
                 <com.google.android.material.floatingactionbutton.FloatingActionButton

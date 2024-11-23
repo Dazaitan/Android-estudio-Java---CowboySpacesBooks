@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Book implements Serializable {
     private String titulo,editorial,autor,formato,descripcion,estado;
-    private long isbn;
+    private String isbn;
     private int nPaginas;
     private String portada;//portada
     // Constructor
@@ -12,13 +12,13 @@ public class Book implements Serializable {
     public Book() {
     }
 
-    public Book(String titulo, long isbn, String coverImageUrl) {
+    public Book(String titulo, String isbn, String coverImageUrl) {
         this.titulo = titulo;
         this.isbn = isbn;
         this.portada = coverImageUrl;
     }
 
-    public Book(String title, String editorial, String autor, String formato, String descripcion, String estado, long isbn, int nPaginas, String coverImageUrl) {
+    public Book(String title, String editorial, String autor, String formato, String descripcion, String estado, String isbn, int nPaginas, String coverImageUrl) {
         this.titulo = title;
         this.editorial = editorial;
         this.autor = autor;
@@ -88,11 +88,11 @@ public class Book implements Serializable {
         this.estado = estado;
     }
 
-    public long getIsbn() {
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(long isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
