@@ -31,6 +31,7 @@ public class InsertarLibroTask extends AsyncTask<String, Void, String> {
         String descripcion = strings[5];
         String bookType = strings[6];
         String portada = strings[7];
+        String estado = strings[8];
         try {
             Log.d("Log", "Ingreso a la tarea de Insertar nuevo libro");
             URL url = new URL("http://192.168.100.5/cowboyspacesbooks/libros/insertarLibro.php");
@@ -48,6 +49,7 @@ public class InsertarLibroTask extends AsyncTask<String, Void, String> {
             jsonParam.put("descripcion",descripcion);
             jsonParam.put("Formato",bookType);
             jsonParam.put("portada",portada);
+            jsonParam.put("estado",estado);
 
             OutputStream os = conn.getOutputStream();
             os.write(jsonParam.toString().getBytes("UTF-8"));

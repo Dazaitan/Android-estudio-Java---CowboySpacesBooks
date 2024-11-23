@@ -302,28 +302,28 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Leer más tarde" />
+                android:text="Leyendo" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_read_now"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Leer ahora" />
+                android:text="Quiero leer" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_finished"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="¡Lo he leído todo!" />
+                android:text="Leido" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_give_up"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="darse por vencido" />
+                android:text="Dropeado" />
         </com.google.android.material.chip.ChipGroup>
         <LinearLayout
             android:id="@+id/layout_select_collections"

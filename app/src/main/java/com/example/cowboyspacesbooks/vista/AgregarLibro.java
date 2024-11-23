@@ -73,6 +73,7 @@ public class AgregarLibro extends AppCompatActivity {
             EditText etAutor = findViewById(R.id.et_author);
             EditText etEditor = findViewById(R.id.et_editor);
             EditText etIsbn = findViewById(R.id.et_isbn);
+            ChipGroup chipEstado = findViewById(R.id.chip_group_status);
             EditText etNumPaginas = findViewById(R.id.et_num_pages);
             EditText etDescripcion = findViewById(R.id.et_description);
             ChipGroup chipGroupBookType = findViewById(R.id.chip_group_book_type);
@@ -92,6 +93,8 @@ public class AgregarLibro extends AppCompatActivity {
                     int selectedChipWishId = chipAddWishList.getCheckedChipId();
                     String addWishList = "";
 
+                    int selectedChipEstado = chipEstado.getCheckedChipId();
+                    String estado = "";
 
                     int selectedChipId = chipGroupBookType.getCheckedChipId();
                     String bookType = "";
@@ -103,14 +106,18 @@ public class AgregarLibro extends AppCompatActivity {
                                 bookType = selectedChip.getText().toString();
                                 Chip selectedWishChip = chipAddWishList.findViewById(selectedChipWishId);
                                 addWishList =selectedWishChip.getText().toString();
+                                Chip selectedChipStatus = chipEstado.findViewById(selectedChipEstado);
+                                estado = selectedChipStatus.getText().toString();
+
                                 //Llamar nueva tarea para la insercion a la base de datos
-                                new InsertarLibroTask(AgregarLibro.this).execute(titulo,autor,editor,isbn,numPaginas,descripcion,bookType,imageUrl,addWishList);
+                                new InsertarLibroTask(AgregarLibro.this).execute(titulo,autor,editor,isbn,numPaginas,descripcion,bookType,imageUrl,estado);
                                 //Toast.makeText(AgregarLibro.this, "URL guardada: " + imageUrl, Toast.LENGTH_SHORT).show();
 
                                 if (addWishList.equals("Sí")){
                                     Log.d("AgregarLibro","Entro al if para la creacion de la nuneva tarea");
                                     new AgregarLibroListaTask(AgregarLibro.this).execute("7",isbn);
                                 }
+                                finish();
                             } else {
                                 Toast.makeText(AgregarLibro.this, "No se ha ingresado una URL", Toast.LENGTH_SHORT).show();
                             }
