@@ -40,36 +40,12 @@ public class VistaPrevia extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             LinearLayout layoutSharedButtons = findViewById(R.id.layout_shared_buttons);
-            FloatingActionButton btnAddNote = findViewById(R.id.btn_add_note);
             // Obtén los extras del Intent
-            String titulo = getIntent().getStringExtra("titulo");
             String imagenUrl = getIntent().getStringExtra("imagenUrl");
             String isbn = getIntent().getStringExtra("isbn");
             String contexto = getIntent().getStringExtra("contexto");
 
-            cargarDetallesLibroAPI(isbn,imagenUrl);
-
-            //Configuracion de boton btnTimer
-            FloatingActionButton btnTimer = findViewById(R.id.btn_timer);
-            btnTimer.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //Abrir el modo lectura
-                    Intent intent = new Intent(VistaPrevia.this, ModoLectura.class);
-                    intent.putExtra("titulo", titulo);
-                    intent.putExtra("imagenUrl", imagenUrl);
-                    startActivity(intent);
-                }
-            });
-            //Mostrar o ocultar boton de timer dependiendo del contexto que se reciba como input
-            if ("logros".equals(contexto)) {// Verifica el contexto y muestra oculta el segundo botón
-                Log.d("VistaPrevia","Ingreso a la actividad");
-                // Muestra el segundo botón si el contexto es "logros"
-                btnTimer.setVisibility(View.VISIBLE);
-            } else if ("pruebas".equals(contexto)){
-                btnTimer.setVisibility(View.GONE);
-                Log.d("VistaPrevia", "Boton no habilitado");
-            }
+            cargarDetallesLibroAPI(isbn,imagenUrl,contexto);
 
             //Desplegar menu de gestion de libros inferior
             ImageButton btnMenu = findViewById(R.id.btn_menu);
@@ -78,15 +54,6 @@ public class VistaPrevia extends AppCompatActivity {
                 public void onClick(View v) {
                     BarraInferiorHojaFragment bottomSheetFragment = new BarraInferiorHojaFragment();
                     bottomSheetFragment.show(getSupportFragmentManager(), "BottomSheetDialog");
-                }
-            });
-
-            //Boton para añadir notas
-            btnAddNote = findViewById(R.id.btn_add_note);
-            btnAddNote.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    startActivity(new Intent(VistaPrevia.this, GestionNotasLayout.class));
                 }
             });
             // Referencia al botón btn_back
@@ -101,7 +68,7 @@ public class VistaPrevia extends AppCompatActivity {
             return insets;
         });
     }
-    private void cargarDetallesLibroAPI(String isbn, String imagenUrl) {
+    private void cargarDetallesLibroAPI(String isbn, String imagenUrl, String contexto) {
         IGetDetallesLibro bookApi = RetrofitClient.getClient().create(IGetDetallesLibro.class);
         FloatingActionButton btnTimer = findViewById(R.id.btn_timer);
         //btnTimer.setVisibility(View.GONE);
@@ -128,6 +95,38 @@ public class VistaPrevia extends AppCompatActivity {
                                 .error(R.drawable.error_image)
                                 .into(imagenImageView);
                     }
+
+                    //Activacion del modo lectura
+                    FloatingActionButton btnTimer = findViewById(R.id.btn_timer);
+                    btnTimer.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //Abrir el modo lectura
+                            Intent intent = new Intent(VistaPrevia.this, ModoLectura.class);
+                            intent.putExtra("titulo", libro.getTitulo());
+                            intent.putExtra("isbn", libro.getIsbn());
+                            intent.putExtra("imagenUrl", imagenUrl);
+                            startActivity(intent);
+                        }
+                    });
+                    //Mostrar o ocultar boton de timer dependiendo del contexto que se reciba como input
+                    if ("logros".equals(contexto)) {// Verifica el contexto y muestra oculta el segundo botón
+                        Log.d("VistaPrevia","Ingreso a la actividad");
+                        // Muestra el segundo botón si el contexto es "logros"
+                        btnTimer.setVisibility(View.VISIBLE);
+                    } else if ("pruebas".equals(contexto)){
+                        btnTimer.setVisibility(View.GONE);
+                        Log.d("VistaPrevia", "Boton no habilitado");
+                    }
+                    //Boton para añadir notas
+                    FloatingActionButton btnAddNote = findViewById(R.id.btn_add_note);
+                    btnAddNote = findViewById(R.id.btn_add_note);
+                    btnAddNote.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            startActivity(new Intent(VistaPrevia.this, GestionNotasLayout.class));
+                        }
+                    });
                 } else {
                     Toast.makeText(VistaPrevia.this, "Error al cargar los datos", Toast.LENGTH_SHORT).show();
                 }
