@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
@@ -36,6 +37,7 @@ import retrofit2.Response;
 
 public class Home extends AppCompatActivity {
     private BookAdapter adapter;
+    TextView labelreding;
     private RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,34 +47,12 @@ public class Home extends AppCompatActivity {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-
+            librosLeyendoNumber();
             //CARGUE DE ICONOS PREVIEW DE MANERA HORIZONTAL
             RecyclerView recyclerView = findViewById(R.id.iconPreview_recyclerView);
             LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
             recyclerView.setLayoutManager(layoutManager);
-
-            /*List<Book> listaDeLibros = new ArrayList<>();
-            listaDeLibros.add(new Book("Noches blancas", 1432432, "https://imagessl7.casadellibro.com/a/l/s5/47/9788416440047.webp"));
-            listaDeLibros.add(new Book("Almendra", 10213213,"https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1616927575i/57551565.jpg"));
-
-            // Configura tu adaptador
-            BookAdapter adapter = new BookAdapter(this, listaDeLibros);
-            recyclerView.setAdapter(adapter);
-
-            adapter.setOnItemClickListener(new BookAdapter.OnItemClickListener() {
-                @Override
-                public void onItemClick(int position) {
-                    Log.d("Logros","Ingreso al onclick del recycler de Home");
-                    Book clickedBook = listaDeLibros.get(position);
-                    Intent intent = new Intent(Home.this, VistaPrevia.class);
-                    intent.putExtra("titulo", clickedBook.getTitulo());
-                    intent.putExtra("imagenUrl", clickedBook.getCoverImageUrl());
-                    intent.putExtra("isbn", clickedBook.getIsbn());
-                    // Agrega un extra para el contexto
-                    intent.putExtra("contexto", "pruebas"); // Cambia "value" por el nombre del contexto adecuado
-                    startActivity(intent);
-                }
-            });*/
+            labelreding = findViewById(R.id.label_leyendo);
             cargarLibrosDesdeServidor();
 
             BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -137,5 +117,28 @@ public class Home extends AppCompatActivity {
     }
     public void onCardClick(View view) {
         startActivity(new Intent(Home.this, AgregarLibro.class));
+    }
+    public void librosLeyendoNumber(){
+        ApiService bookApi = RetrofitClient.getClient().create(ApiService.class);
+        bookApi.obtenerLibrosLeidos("leyendo").enqueue(new Callback<List<Book>>() {
+            @Override
+            public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Book> listaDeLibros = response.body();
+                    int numeroDeLibros = listaDeLibros.size();
+
+                    // Mostrar el número de elementos en un log
+                    Log.d("CantidadLibros", "Número de libros: " + numeroDeLibros);
+                    labelreding.setText("Estas leyendo " + numeroDeLibros + " libros.");
+                } else {
+                    Toast.makeText(Home.this, "Error al cargar los datos", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Book>> call, Throwable t) {
+                Log.e("Home", "Error al conectar con el servidor", t);
+            }
+        });
     }
 }

@@ -109,9 +109,10 @@
                     android:gravity="center_vertical">
 
                     <TextView
+                        android:id="@+id/label_leyendo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Estás leyendo 2 libros."
+                        android:text="No estas leyendo ningun libro que mal!!"
                         android:textSize="16sp"
                         android:textColor="@color/black" />
                     <!--Imagenes provisionales-->

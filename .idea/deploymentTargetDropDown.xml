@@ -8,13 +8,13 @@
       <entry key="Logros (1)">
         <State />
       </entry>
-      <entry key="ModoLectura">
-        <State />
-      </entry>
       <entry key="SesionLectura">
         <State />
       </entry>
       <entry key="VistaPrevia">
+        <State />
+      </entry>
+      <entry key="VisualizacionGeneral">
         <State />
       </entry>
       <entry key="app">
