@@ -3,6 +3,7 @@ package com.example.cowboyspacesbooks.vista;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -34,13 +35,17 @@ public class ModoLectura extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
 
-
+            String isbn = getIntent().getStringExtra("isbn");
+            String numPaginas = getIntent().getStringExtra("numPaginas");
+            String pagsLeidas = getIntent().getStringExtra("pagsLeidas");
             FloatingActionButton btnAddNote = findViewById(R.id.btn_add_note);
             btnAddNote = findViewById(R.id.btn_add_note);
             btnAddNote.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(ModoLectura.this, GestionNotasLayout.class));
+                    Intent intent = new Intent(ModoLectura.this, GestionNotasLayout.class);
+                    intent.putExtra("isbn",isbn);
+                    startActivity(intent);
                 }
             });
 
@@ -70,6 +75,7 @@ public class ModoLectura extends AppCompatActivity {
             //Captura de datos del intent donde se desencadena el evento
             TextView bookTitle = findViewById(R.id.book_title);
             ImageView bookCover = findViewById(R.id.book_cover);
+            TextView paginas = findViewById(R.id.book_pages);
             // Recibir los datos del Intent y cargarlos en la interfaz
             Intent intent = getIntent();
             if (intent != null) {
@@ -79,6 +85,7 @@ public class ModoLectura extends AppCompatActivity {
                 // Configurar los datos en las vistas
                 if (titulo != null) {
                     bookTitle.setText(titulo);
+                    paginas.setText("pags." + pagsLeidas + "/" + numPaginas);
                 }
 
                 if (imagenUrl != null) {
@@ -95,7 +102,28 @@ public class ModoLectura extends AppCompatActivity {
             btnConfirmar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    // Calcular el tiempo total transcurrido
+                    long tiempoTotal;
+                    if (isPaused) {
+                        // Si está pausado, usa el tiempo en pausa
+                        tiempoTotal = timeWhenPaused;
+                    } else {
+                        // Si no está pausado, calcular el tiempo actual
+                        tiempoTotal = System.currentTimeMillis() - startTime;
+                    }
 
+                    Intent intent = new Intent(ModoLectura.this, SesionLecturaView.class);
+
+                    // Agregar datos al Intent
+                    intent.putExtra("isbn", getIntent().getStringExtra("isbn"));
+                    intent.putExtra("pagsLeidas", getIntent().getStringExtra("pagsLeidas"));
+                    intent.putExtra("numPaginas", getIntent().getStringExtra("numPaginas"));
+                    intent.putExtra("tiempo", tiempoTotal);
+
+                    // Iniciar la siguiente actividad
+                    startActivity(intent);
+                    // Finalizar la actividad
+                    finish();
                 }
             });
             ImageButton btnBack = findViewById(R.id.cancel_button);

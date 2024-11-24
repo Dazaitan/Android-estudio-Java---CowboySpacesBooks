@@ -133,7 +133,7 @@
                     android:id="@+id/book_pages"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="pags. 7 / 178"
+                    android:text=""
                     android:textColor="@android:color/black"
                     android:textSize="14sp"/>
 

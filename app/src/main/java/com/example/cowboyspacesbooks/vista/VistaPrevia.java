@@ -105,6 +105,8 @@ public class VistaPrevia extends AppCompatActivity {
                             Intent intent = new Intent(VistaPrevia.this, ModoLectura.class);
                             intent.putExtra("titulo", libro.getTitulo());
                             intent.putExtra("isbn", libro.getIsbn());
+                            intent.putExtra("pagsLeidas", libro.getPagsLeidas());
+                            intent.putExtra("numPaginas", libro.getnPaginas());
                             intent.putExtra("imagenUrl", imagenUrl);
                             startActivity(intent);
                         }
@@ -134,7 +136,6 @@ public class VistaPrevia extends AppCompatActivity {
                 }
 
             }
-
             @Override
             public void onFailure(Call<List<Book>> call, Throwable t) {
                 Log.e("Home", "Error al conectar con el servidor", t);

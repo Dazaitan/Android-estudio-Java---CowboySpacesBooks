@@ -2,6 +2,7 @@ package com.example.cowboyspacesbooks.controlador;
 
 import com.example.cowboyspacesbooks.modelo.Book;
 import com.example.cowboyspacesbooks.modelo.Notes;
+import com.example.cowboyspacesbooks.modelo.SesionLectura;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -13,13 +14,16 @@ import java.util.List;
 public interface ApiService {
     @GET("libros/GetVistaPrevia.php")
     Call<List<Book>> obtenerDetallesLibros(@Query("isbn") String isbn);
-
+    //obtener libros dependiente del estado que se defina
     @GET("libros/GetLibrosPorEstado.php")
     Call<List<Book>> obtenerLibrosLeidos(@Query("estado") String estado);
-
+    //obtener una lista de libros
     @GET("libros/GetListaLibros.php")
     Call<List<Book>> obtenerLibros();
-
+    //Insetar notas
     @POST("Notas/PostInsertarNotas.php")
     Call<Void> insertarNota(@Body Notes note);
+    //Insetar sesion de lectura
+    @POST("sesionlectura/PostSesionLectura.php")
+    Call<Void> enviarSesionDeLectura(@Body SesionLectura sesionLectura);
 }

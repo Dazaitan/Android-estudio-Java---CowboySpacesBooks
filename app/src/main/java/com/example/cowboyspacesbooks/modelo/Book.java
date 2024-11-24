@@ -5,7 +5,7 @@ import java.io.Serializable;
 public class Book implements Serializable {
     private String titulo,editorial,autor,formato,descripcion,estado;
     private String isbn;
-    private int nPaginas;
+    private String nPaginas,pagsLeidas;
     private String portada;//portada
     // Constructor
 
@@ -18,7 +18,7 @@ public class Book implements Serializable {
         this.portada = coverImageUrl;
     }
 
-    public Book(String title, String editorial, String autor, String formato, String descripcion, String estado, String isbn, int nPaginas, String coverImageUrl) {
+    public Book(String title, String editorial, String autor, String formato, String descripcion, String estado, String isbn, String nPaginas, String pagsLeidas, String coverImageUrl) {
         this.titulo = title;
         this.editorial = editorial;
         this.autor = autor;
@@ -27,6 +27,7 @@ public class Book implements Serializable {
         this.estado = estado;
         this.isbn = isbn;
         this.nPaginas = nPaginas;
+        this.pagsLeidas = pagsLeidas;
         this.portada = coverImageUrl;
     }
 
@@ -96,12 +97,20 @@ public class Book implements Serializable {
         this.isbn = isbn;
     }
 
-    public int getnPaginas() {
+    public String getnPaginas() {
         return nPaginas;
     }
 
-    public void setnPaginas(int nPaginas) {
+    public void setnPaginas(String nPaginas) {
         this.nPaginas = nPaginas;
+    }
+
+    public String getPagsLeidas() {
+        return pagsLeidas;
+    }
+
+    public void setPagsLeidas(String pagsLeidas) {
+        this.pagsLeidas = pagsLeidas;
     }
 }
 

@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
     android:id="@+id/main"
-    tools:context=".vista.SesionLectura">
+    tools:context=".vista.SesionLecturaView">
 
     <!-- Botón de regresar -->
     <ImageButton
@@ -109,7 +109,7 @@
             android:id="@+id/tv_read_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="00:00:02"
+            android:text="00:00:00"
             android:textSize="24sp"
             android:textColor="@android:color/black"
             android:layout_marginTop="8dp" />
