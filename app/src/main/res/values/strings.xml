@@ -3,4 +3,13 @@
     <string name="registroStr">Registrarse</string>
     <string name="iniciar_SesionStr">Iniciar sesion</string>
     <string name="logotipoStr">Logo</string>
+    <string name="guardar">Guardar</string>
+    <string name="volver">Volver</string>
+    <string name="anadirLibro">Añadir un libro</string>
+    <string name="editarLibro">Editar este libro</string>
+    <string name="cambiarEstado">Cambiar estado</string>
+    <string name="titulo">Titulo</string>
+    <string name="autor">Autor</string>
+    <string name="editor">Editor</string>
+    <string name="isbn">ISBN</string>
 </resources>

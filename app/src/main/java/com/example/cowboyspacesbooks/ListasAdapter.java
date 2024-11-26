@@ -2,6 +2,7 @@
 package com.example.cowboyspacesbooks;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -74,12 +75,14 @@ public class ListasAdapter extends RecyclerView.Adapter<ListasAdapter.ListasView
         }
 
         public void bind(Listas lista) {
-            Glide.with(context)
+            //Portada
+            /*Glide.with(context)
                     .load(lista.getPortada())
                     .placeholder(R.drawable.lo_cargando)
                     .error(R.drawable.ic_book_placeholder)
-                    .into(imageView);
+                    .into(imageView);*/
             titleTextView.setText(lista.getNameList());
+            Log.d("ListasAdapter", lista.getNameList());
         }
     }
 }

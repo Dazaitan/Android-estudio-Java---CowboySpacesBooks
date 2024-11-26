@@ -3,6 +3,7 @@ package com.example.cowboyspacesbooks;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -15,7 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cowboyspacesbooks.modelo.Book;
 import com.example.cowboyspacesbooks.modelo.Listas;
+import com.example.cowboyspacesbooks.vista.AgregarLibro;
+import com.example.cowboyspacesbooks.vista.AgregarListaBottomSheet;
 import com.example.cowboyspacesbooks.vista.VistaPrevia;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,17 +44,15 @@ public class VisualizacionGeneral extends AppCompatActivity {
         // Inicializa el RecyclerView
         recyclerView = findViewById(R.id.vistaLibrosColeccion);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-
         // Obtén el contexto del Intent
         //String contexto = getIntent().getStringExtra("contexto");
-        String contexto = "listas";
+        String contexto = "libros";
 
         if (contexto == null) {
             Toast.makeText(this, "Contexto no especificado", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
-
         // Decide qué mostrar según el contexto
         if (contexto.equals("libros")) {
             mostrarLibros();
@@ -60,6 +62,25 @@ public class VisualizacionGeneral extends AppCompatActivity {
             Toast.makeText(this, "Contexto desconocido", Toast.LENGTH_SHORT).show();
             finish();
         }
+        FloatingActionButton btnAdd = findViewById(R.id.button_add);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (contexto.equals("libros")) {
+                    Intent intent = new Intent(VisualizacionGeneral.this, AgregarLibro.class);
+                    intent.putExtra("contexto","insertar");
+                    startActivity(intent);
+                } else if (contexto.equals("listas")) {
+                    AgregarListaBottomSheet bottomSheet = new AgregarListaBottomSheet();
+                    bottomSheet.setAddCollectionListener(collectionName -> {
+                        // Aquí manejas la colección añadida
+                        Toast.makeText(VisualizacionGeneral.this, "Colección añadida: " + collectionName, Toast.LENGTH_SHORT).show();
+                        // Puedes actualizar tu RecyclerView o base de datos aquí
+                    });
+                    bottomSheet.show(getSupportFragmentManager(), "AddCollectionBottomSheet");
+                }
+            }
+        });
     }
 
     private void mostrarLibros() {
@@ -81,8 +102,8 @@ public class VisualizacionGeneral extends AppCompatActivity {
     private void mostrarListas() {
         // Ejemplo de listas de colecciones
         List<Listas> listas = new ArrayList<>();
-        listas.add(new Listas(1, "pruebas", "5"));
-        listas.add(new Listas(2, "pruebas 2", "10"));
+        listas.add(new Listas(1, "pruebas"));
+        listas.add(new Listas(2, "pruebas 2"));
 
         // Configura el adaptador de listas
         listasAdapter = new ListasAdapter(this, listas);

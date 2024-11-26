@@ -10,5 +10,5 @@
     <!-- Opcional: Borde alrededor de la vista -->
     <stroke
         android:width="2dp"
-        android:color="@color/primaryColor" /> <!-- Cambia el color y ancho del borde según tus necesidades -->
+        android:color="@color/white" /> <!-- Cambia el color y ancho del borde según tus necesidades -->
 </shape>

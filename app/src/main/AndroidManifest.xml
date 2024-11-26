@@ -31,14 +31,11 @@
             android:name=".vista.ModoLectura"
             android:exported="false" />
         <activity
-            android:name=".vista.BarraInferiorGestionLibros"
-            android:exported="false" />
-        <activity
             android:name=".vista.VistaPrevia"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".vista.AgregarLibro"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".vista.Logros"
             android:exported="false" />
@@ -57,7 +54,7 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:statusBarColor="@color/primaryColor">
+            android:statusBarColor="@color/appColor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

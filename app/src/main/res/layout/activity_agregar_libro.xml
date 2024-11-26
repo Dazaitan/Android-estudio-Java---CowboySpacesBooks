@@ -16,7 +16,7 @@
         android:src="@drawable/ic_arrow_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="Volver"
+        android:contentDescription="@string/volver"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"/>
 
@@ -30,7 +30,7 @@
         android:src="@drawable/ic_check"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="Guardar"
+        android:contentDescription="@string/guardar"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"/>
 
@@ -55,7 +55,7 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Añadir un libro"
+            android:text="@string/anadirLibro"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/black"
@@ -82,7 +82,7 @@
             android:id="@+id/et_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Título"
+            android:hint="@string/titulo"
             android:background="@drawable/edit_text_background"
             android:padding="8dp"
             app:layout_constraintTop_toBottomOf="@id/iv_book_image"
@@ -95,7 +95,7 @@
             android:id="@+id/et_author"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Autor"
+            android:hint="@string/autor"
             android:background="@drawable/edit_text_background"
             android:padding="8dp"
             app:layout_constraintTop_toBottomOf="@id/et_title"
@@ -108,7 +108,7 @@
             android:id="@+id/et_editor"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Editor"
+            android:hint="@string/editor"
             android:background="@drawable/edit_text_background"
             android:padding="8dp"
             app:layout_constraintTop_toBottomOf="@id/et_author"
@@ -121,7 +121,7 @@
             android:id="@+id/et_isbn"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="ISBN"
+            android:hint="@string/isbn"
             android:background="@drawable/edit_text_background"
             android:padding="8dp"
             app:layout_constraintTop_toBottomOf="@id/et_editor"
@@ -154,7 +154,7 @@
             android:layout_marginTop="8dp">
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_hardpaper_book"
+                android:id="@+id/chip_softpaper_book"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -165,10 +165,10 @@
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="libro electrónico" />
+                android:text="Libro electrónico" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip_softpaper_book"
+                android:id="@+id/chip_hardpaper_book"
                 style="@style/Widget.MaterialComponents.Chip.Choice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -207,6 +207,30 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="8dp" />
+        <TextView
+            android:id="@+id/tv_pages_read"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿Cuántas páginas has leído?"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@id/et_num_pages"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="16dp" />
+
+        <!-- Campo para páginas leídas -->
+        <EditText
+            android:id="@+id/et_pages_read"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Páginas leídas"
+            android:inputType="number"
+            android:background="@drawable/edit_text_background"
+            android:padding="8dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_pages_read"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="8dp" />
 
         <!-- Label para descripción -->
         <TextView
@@ -216,7 +240,7 @@
             android:text="Descripción del libro"
             android:textSize="16sp"
             android:textColor="@color/black"
-            app:layout_constraintTop_toBottomOf="@id/et_num_pages"
+            app:layout_constraintTop_toBottomOf="@id/et_pages_read"
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginTop="16dp" />
 

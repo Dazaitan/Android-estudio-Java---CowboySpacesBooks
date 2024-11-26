@@ -2,19 +2,15 @@ package com.example.cowboyspacesbooks.modelo;
 
 public class Listas {
     private int lista_Id;
-    private String nameList,descripcion,portada;;
+    private String nameList;
 
-    public Listas(int lista_Id, String nameList, String descripcion, String portada) {
-        this.lista_Id = lista_Id;
+    public Listas(String nameList) {
         this.nameList = nameList;
-        this.descripcion = descripcion;
-        this.portada = portada;
     }
 
-    public Listas(int lista_Id, String nameList, String descripcion) {
+    public Listas(int lista_Id, String nameList) {
         this.lista_Id = lista_Id;
         this.nameList = nameList;
-        this.descripcion = descripcion;
     }
 
     public int getLista_Id() {
@@ -31,21 +27,5 @@ public class Listas {
 
     public void setNameList(String nameList) {
         this.nameList = nameList;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public String getPortada() {
-        return portada;
-    }
-
-    public void setPortada(String portada) {
-        this.portada = portada;
     }
 }

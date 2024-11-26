@@ -1,13 +1,16 @@
 package com.example.cowboyspacesbooks.controlador;
 
 import com.example.cowboyspacesbooks.modelo.Book;
+import com.example.cowboyspacesbooks.modelo.Listas;
 import com.example.cowboyspacesbooks.modelo.Notes;
 import com.example.cowboyspacesbooks.modelo.SesionLectura;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 import java.util.List;
@@ -26,4 +29,12 @@ public interface ApiService {
     //Insetar sesion de lectura
     @POST("sesionlectura/PostSesionLectura.php")
     Call<Void> enviarSesionDeLectura(@Body SesionLectura sesionLectura);
+    @POST("sesionlectura/PostSesionLectura.php")
+    Call<Void> insertarLista(@Body Listas lista);
+
+    @PUT("libros/PutActualizarLibro.php")
+    Call<Void> actualizarLibro(@Body Book libro);
+
+    @DELETE("libros/DeleteEliminarLibro.php")
+    Call<Void> eliminarLibro(@Body Book libro);
 }

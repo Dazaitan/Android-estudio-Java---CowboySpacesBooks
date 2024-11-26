@@ -52,7 +52,7 @@ public class VistaPrevia extends AppCompatActivity {
             btnMenu.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    BarraInferiorHojaFragment bottomSheetFragment = new BarraInferiorHojaFragment();
+                    BarraInferiorHojaFragment bottomSheetFragment = BarraInferiorHojaFragment.nuevaInstancia(isbn);
                     bottomSheetFragment.show(getSupportFragmentManager(), "BottomSheetDialog");
                 }
             });

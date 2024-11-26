@@ -116,7 +116,9 @@ public class Home extends AppCompatActivity {
         });
     }
     public void onCardClick(View view) {
-        startActivity(new Intent(Home.this, AgregarLibro.class));
+        Intent intent = new Intent(Home.this, AgregarLibro.class);
+        intent.putExtra("contexto","insertar");
+        startActivity(intent);
     }
     public void librosLeyendoNumber(){
         ApiService bookApi = RetrofitClient.getClient().create(ApiService.class);
