@@ -201,14 +201,17 @@ public class AgregarLibro extends AppCompatActivity {
                         chipEstado.check(R.id.chip_give_up);
                     }
                     String formato = libro.getFormato();
-                    if (formato.equals("Tapa dura")){
-                        chipGroupBookType.check(R.id.chip_hardpaper_book);
-                    } else if (formato.equals("Tapa blanda")) {
-                        chipGroupBookType.check(R.id.chip_softpaper_book);
-                    } else if (formato.equals("libro electronico")) {
-                        chipGroupBookType.check(R.id.chip_ebook);
-                    } else if (formato.equals("Audiolibro")) {
-                        chipGroupBookType.check(R.id.chip_audio_book);
+                    Log.d("AgregarLibro", formato);
+                    if (formato !=null){
+                        if (formato.equals("Tapa dura")){
+                            chipGroupBookType.check(R.id.chip_hardpaper_book);
+                        } else if (formato.equals("Tapa blanda")) {
+                            chipGroupBookType.check(R.id.chip_softpaper_book);
+                        } else if (formato.equals("libro electronico")) {
+                            chipGroupBookType.check(R.id.chip_ebook);
+                        } else if (formato.equals("Audiolibro")) {
+                            chipGroupBookType.check(R.id.chip_audio_book);
+                        }
                     }
                     ImageView imagenImageView = findViewById(R.id.iv_book_image);
                     if (libro.getCoverImageUrl() != null) {

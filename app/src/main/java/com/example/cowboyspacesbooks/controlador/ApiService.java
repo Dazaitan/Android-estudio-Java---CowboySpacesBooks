@@ -1,6 +1,7 @@
 package com.example.cowboyspacesbooks.controlador;
 
 import com.example.cowboyspacesbooks.modelo.Book;
+import com.example.cowboyspacesbooks.modelo.LibroLista;
 import com.example.cowboyspacesbooks.modelo.Listas;
 import com.example.cowboyspacesbooks.modelo.Notes;
 import com.example.cowboyspacesbooks.modelo.SesionLectura;
@@ -37,4 +38,10 @@ public interface ApiService {
 
     @DELETE("libros/DeleteEliminarLibro.php")
     Call<Void> eliminarLibro(@Body Book libro);
+
+    @GET("listas/GetListas.php")
+    Call<List<Listas>> obtenerListas();
+    
+    @GET("listas/GetrelListasLibros.php")
+    Call<List<LibroLista>> obtenerLibrosListas(@Query("lista_Id") String listaId);
 }

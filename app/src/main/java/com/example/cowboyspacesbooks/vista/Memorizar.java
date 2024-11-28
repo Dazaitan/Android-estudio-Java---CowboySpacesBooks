@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 
 import com.example.cowboyspacesbooks.Home;
 import com.example.cowboyspacesbooks.R;
+import com.example.cowboyspacesbooks.VisualizacionGeneral;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Memorizar extends AppCompatActivity {
@@ -39,7 +40,10 @@ public class Memorizar extends AppCompatActivity {
                     } else if (item.getItemId() == R.id.nav_logros) {
                         startActivity(new Intent(Memorizar.this, Logros.class));
                         return true;
-                    } else if(item.getItemId() == R.id.nav_profile){
+                    } else if(item.getItemId() == R.id.nav_coleccion){
+                        Intent intent = new Intent(Memorizar.this, VisualizacionGeneral.class);
+                        intent.putExtra("contexto","listas");
+                        startActivity(intent);
                         return true;
                     }
                     return false;

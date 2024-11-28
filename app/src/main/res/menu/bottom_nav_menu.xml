@@ -13,7 +13,7 @@
         android:icon="@drawable/ic_logrosnavbar"
         android:title="Logros" />
     <item
-        android:id="@+id/nav_profile"
+        android:id="@+id/nav_coleccion"
         android:icon="@drawable/ic_usuario"
-        android:title="Profile" />
+        android:title="Colecciones" />
 </menu>

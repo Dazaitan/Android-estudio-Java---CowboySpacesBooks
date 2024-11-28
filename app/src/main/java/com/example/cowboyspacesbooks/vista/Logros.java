@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cowboyspacesbooks.BookAdapter;
 import com.example.cowboyspacesbooks.Home;
 import com.example.cowboyspacesbooks.R;
+import com.example.cowboyspacesbooks.VisualizacionGeneral;
 import com.example.cowboyspacesbooks.controlador.ApiService;
 import com.example.cowboyspacesbooks.controlador.RetrofitClient;
 import com.example.cowboyspacesbooks.modelo.Book;
@@ -57,7 +58,10 @@ public class Logros extends AppCompatActivity {
                     } else if (item.getItemId() == R.id.nav_logros) {
                         //Estoy en esta actividad
                         return true;
-                    } else if(item.getItemId() == R.id.nav_profile){
+                    } else if(item.getItemId() == R.id.nav_coleccion){
+                        Intent intent = new Intent(Logros.this, VisualizacionGeneral.class);
+                        intent.putExtra("contexto","listas");
+                        startActivity(intent);
                         return true;
                     }
                     return false;

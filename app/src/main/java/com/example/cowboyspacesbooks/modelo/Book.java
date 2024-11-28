@@ -31,6 +31,13 @@ public class Book implements Serializable {
         this.portada = coverImageUrl;
     }
 
+    public Book(String titulo, String autor, String isbn, String portada) {
+        this.titulo=titulo;
+        this.autor=autor;
+        this.isbn=isbn;
+        this.portada=portada;
+    }
+
     // Getters
     public String getTitulo() {
         return titulo;

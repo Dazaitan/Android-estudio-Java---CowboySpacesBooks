@@ -68,7 +68,10 @@ public class Home extends AppCompatActivity {
                     } else if (item.getItemId() == R.id.nav_logros) {
                         startActivity(new Intent(Home.this, Logros.class));
                         return true;
-                    } else if(item.getItemId() == R.id.nav_profile){
+                    } else if(item.getItemId() == R.id.nav_coleccion){
+                        Intent intent = new Intent(Home.this, VisualizacionGeneral.class);
+                        intent.putExtra("contexto","listas");
+                        startActivity(intent);
                         return true;
                     }
                     return false;

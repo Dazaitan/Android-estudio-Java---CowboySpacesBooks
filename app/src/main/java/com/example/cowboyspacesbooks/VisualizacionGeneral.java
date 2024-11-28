@@ -3,7 +3,10 @@ package com.example.cowboyspacesbooks;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -11,24 +14,33 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cowboyspacesbooks.controlador.ApiService;
+import com.example.cowboyspacesbooks.controlador.RetrofitClient;
 import com.example.cowboyspacesbooks.modelo.Book;
+import com.example.cowboyspacesbooks.modelo.LibroLista;
 import com.example.cowboyspacesbooks.modelo.Listas;
 import com.example.cowboyspacesbooks.vista.AgregarLibro;
 import com.example.cowboyspacesbooks.vista.AgregarListaBottomSheet;
 import com.example.cowboyspacesbooks.vista.VistaPrevia;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class VisualizacionGeneral extends AppCompatActivity {
 
     private RecyclerView recyclerView;
-    private BookAdapter bookAdapter;
     private ListasAdapter listasAdapter;
+    private BookAdapter bookAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +55,11 @@ public class VisualizacionGeneral extends AppCompatActivity {
         });
         // Inicializa el RecyclerView
         recyclerView = findViewById(R.id.vistaLibrosColeccion);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(gridLayoutManager);
+        String listaId = getIntent().getStringExtra("listaId");
         // Obtén el contexto del Intent
-        //String contexto = getIntent().getStringExtra("contexto");
-        String contexto = "libros";
+        String contexto = getIntent().getStringExtra("contexto");
 
         if (contexto == null) {
             Toast.makeText(this, "Contexto no especificado", Toast.LENGTH_SHORT).show();
@@ -81,37 +94,131 @@ public class VisualizacionGeneral extends AppCompatActivity {
                 }
             }
         });
+        ImageButton btnBack =findViewById(R.id.btn_back);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish(); // Cierra la actividad actual y vuelve a la anterior
+            }
+        });
+
     }
 
     private void mostrarLibros() {
-        // Ejemplo de lista de libros
-        List<Book> libros = new ArrayList<>();
-        libros.add(new Book("Libro 1", "Autor 1", "https://example.com/libro1.jpg"));
-        libros.add(new Book("Libro 2", "Autor 2", "https://example.com/libro2.jpg"));
+        ApiService bookApi = RetrofitClient.getClient().create(ApiService.class);
+        String listaId = getIntent().getStringExtra("listaId");
+        Log.d("VisualizacionGeneral",listaId);
+        // Verifica si listaId es nulo o vacío
+        if (listaId != null && !listaId.isEmpty()) {
+            // Si hay un listaId, obtener los libros relacionados con la lista
+            bookApi.obtenerLibrosListas(listaId).enqueue(new Callback<List<LibroLista>>() {
+                @Override
+                public void onResponse(Call<List<LibroLista>> call, Response<List<LibroLista>> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        List<LibroLista> libroDeLibroListas = response.body();
+                        List<Book> listaDeLibros = new ArrayList<>();
 
-        // Configura el adaptador de libros
-        bookAdapter = new BookAdapter(this, libros);
+                        // Convertir los objetos LibroLista a Book
+                        for (LibroLista libroLista : libroDeLibroListas) {
+                            Book book = new Book(
+                                    libroLista.getTitulo(),
+                                    libroLista.getAutor(),
+                                    libroLista.getIsbn(),
+                                    libroLista.getPortada()
+                            );
+                            listaDeLibros.add(book);
+                        }
+
+                        // Configurar el adaptador con los objetos Book
+                        configurarAdaptador(listaDeLibros);
+                    } else {
+                        Log.d("API_Response", "Código de respuesta: " + response.code());
+                        Log.d("API_Response", "Error del cuerpo: " + response.errorBody());
+                        Toast.makeText(VisualizacionGeneral.this, "Error al cargar los datos", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<LibroLista>> call, Throwable t) {
+                    Log.e("VisualizacionGeneral", "Error al conectar con el servidor", t);
+                    Toast.makeText(VisualizacionGeneral.this, "Error al conectar con el servidor", Toast.LENGTH_SHORT).show();
+                }
+            });
+        } else {
+            // Si no hay listaId, obtener todos los libros
+            bookApi.obtenerLibros().enqueue(new Callback<List<Book>>() {
+                @Override
+                public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        List<Book> listaDeLibros = response.body();
+
+                        // Configurar el adaptador con los libros
+                        configurarAdaptador(listaDeLibros);
+                    } else {
+                        Toast.makeText(VisualizacionGeneral.this, "Error al cargar los datos", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<Book>> call, Throwable t) {
+                    Log.e("VisualizacionGeneral", "Error al conectar con el servidor", t);
+                    Toast.makeText(VisualizacionGeneral.this, "Error al conectar con el servidor", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+    }
+
+    // Método para configurar el adaptador
+    private void configurarAdaptador(List<Book> listaDeLibros) {
+        bookAdapter = new BookAdapter(VisualizacionGeneral.this, listaDeLibros);
         recyclerView.setAdapter(bookAdapter);
 
-        bookAdapter.setOnItemClickListener(position -> {
-            Book libroSeleccionado = libros.get(position);
-            Toast.makeText(this, "Clic en libro: " + libroSeleccionado.getTitulo(), Toast.LENGTH_SHORT).show();
+        // Configurar el listener para clics en los ítems
+        bookAdapter.setOnItemClickListener(new BookAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Book clickedBook = listaDeLibros.get(position);
+
+                // Crear el Intent para la nueva actividad
+                Intent intent = new Intent(VisualizacionGeneral.this, VistaPrevia.class);
+                intent.putExtra("titulo", clickedBook.getTitulo());
+                intent.putExtra("imagenUrl", clickedBook.getCoverImageUrl());
+                intent.putExtra("isbn", clickedBook.getIsbn());
+                intent.putExtra("contexto", "pruebas");
+
+                // Iniciar la nueva actividad
+                startActivity(intent);
+            }
         });
     }
 
     private void mostrarListas() {
         // Ejemplo de listas de colecciones
-        List<Listas> listas = new ArrayList<>();
-        listas.add(new Listas(1, "pruebas"));
-        listas.add(new Listas(2, "pruebas 2"));
-
-        // Configura el adaptador de listas
-        listasAdapter = new ListasAdapter(this, listas);
-        recyclerView.setAdapter(listasAdapter);
-
-        listasAdapter.setOnItemClickListener(position -> {
-            Listas listaSeleccionada = listas.get(position);
-            Toast.makeText(this, "Clic en lista: " + listaSeleccionada.getNameList(), Toast.LENGTH_SHORT).show();
+        ApiService lista = RetrofitClient.getClient().create(ApiService.class);
+        lista.obtenerListas().enqueue(new Callback<List<Listas>>() {
+            @Override
+            public void onResponse(Call<List<Listas>> call, Response<List<Listas>> response) {
+                if (response.isSuccessful() && response.body() !=null){
+                    List<Listas> listaColeccion = response.body();
+                    listasAdapter = new ListasAdapter(VisualizacionGeneral.this,listaColeccion);
+                    recyclerView.setAdapter(listasAdapter);
+                    listasAdapter.setOnItemClickListener(new ListasAdapter.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(int position) {
+                            Listas clickedLista = listaColeccion.get(position);
+                            String listaId = String.valueOf(clickedLista.getLista_Id());
+                            Intent intent = new Intent(VisualizacionGeneral.this, VisualizacionGeneral.class);
+                            intent.putExtra("contexto","libros");
+                            intent.putExtra("listaId",listaId);
+                            startActivity(intent);
+                        }
+                    });
+                }
+            }
+            @Override
+            public void onFailure(Call<List<Listas>> call, Throwable t) {
+                Log.d("onFailuraVisualizacionGeneral", "Error en la consulta");
+            }
         });
     }
 }
