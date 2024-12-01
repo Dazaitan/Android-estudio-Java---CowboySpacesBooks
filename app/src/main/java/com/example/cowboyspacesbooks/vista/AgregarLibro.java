@@ -152,9 +152,9 @@ public class AgregarLibro extends AppCompatActivity {
                                     //actualizacion de datos
                                     Book libro = new Book(titulo, editor, autor, bookType, descripcion, estado, isbn, numPaginas, pagsLeidas, imageUrl);
                                     libro.setIsbnEdit(isbn2);
-                                    Gson gson = new Gson();
+                                    /*Gson gson = new Gson();
                                     String json = gson.toJson(libro);
-                                    Log.d("ActualizarLibroJSON", "Datos enviados: " + json);
+                                    Log.d("ActualizarLibroJSON", "Datos enviados: " + json);*/
                                     ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
                                     apiService.actualizarLibro(libro).enqueue(new Callback<Void>() {
                                         @Override

@@ -37,7 +37,7 @@ public interface ApiService {
     Call<Void> actualizarLibro(@Body Book libro);
 
     @DELETE("libros/DeleteEliminarLibro.php")
-    Call<Void> eliminarLibro(@Body Book libro);
+    Call<Void> eliminarLibro(@Query("isbn") String isbn);
 
     @GET("listas/GetListas.php")
     Call<List<Listas>> obtenerListas();

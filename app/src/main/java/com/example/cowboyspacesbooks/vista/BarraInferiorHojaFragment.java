@@ -9,9 +9,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cowboyspacesbooks.R;
+import com.example.cowboyspacesbooks.controlador.ApiService;
+import com.example.cowboyspacesbooks.controlador.RetrofitClient;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
+import java.io.IOException;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BarraInferiorHojaFragment extends BottomSheetDialogFragment {
     private static final String ARG_PARAM_ISBN = "param";
@@ -45,9 +54,40 @@ public class BarraInferiorHojaFragment extends BottomSheetDialogFragment {
         });
 
         deleteOption.setOnClickListener(v -> {
-            // Acción para eliminar el libro
-            dismiss();
+            if (parametro != null && !parametro.isEmpty()) {
+                ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+                apiService.eliminarLibro(parametro).enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.isSuccessful()) {
+                            if (isAdded()) {
+                                Toast.makeText(requireContext(), "Libro eliminado correctamente.", Toast.LENGTH_SHORT).show();
+                            }
+                            Log.d("EliminarLibro", "Libro eliminado correctamente.");
+                        } else {
+                            if (isAdded()) {
+                                Toast.makeText(requireContext(), "Error al eliminar el libro.", Toast.LENGTH_SHORT).show();
+                            }
+                            Log.e("EliminarLibro", "Error en la respuesta: " + response.code());
+                        }
+                        dismiss(); // Cierra el BottomSheet solo después de manejar el callback
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        if (isAdded()) {
+                            Toast.makeText(requireContext(), "Error al conectar con el servidor.", Toast.LENGTH_SHORT).show();
+                        }
+                        Log.e("EliminarLibro", "Error al conectar con el servidor.", t);
+                        dismiss(); // Cierra el BottomSheet solo después de manejar el callback
+                    }
+                });
+            } else {
+                Toast.makeText(requireContext(), "Parámetro no válido.", Toast.LENGTH_SHORT).show();
+                dismiss(); // Cierra el BottomSheet aquí si el parámetro es inválido
+            }
         });
+
         return view;
     }
 }
