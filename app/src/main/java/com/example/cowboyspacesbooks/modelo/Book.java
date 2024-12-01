@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Book implements Serializable {
     private String titulo,editorial,autor,formato,descripcion,estado;
-    private String isbn;
+    private String isbn,isbnEdit;
     private String nPaginas,pagsLeidas;
     private String portada;//portada
     // Constructor
@@ -118,6 +118,14 @@ public class Book implements Serializable {
 
     public void setPagsLeidas(String pagsLeidas) {
         this.pagsLeidas = pagsLeidas;
+    }
+
+    public String getIsbnEdit() {
+        return isbnEdit;
+    }
+
+    public void setIsbnEdit(String isbnEdit) {
+        this.isbnEdit = isbnEdit;
     }
 }
 

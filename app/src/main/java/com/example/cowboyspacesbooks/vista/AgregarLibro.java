@@ -28,6 +28,7 @@ import com.example.cowboyspacesbooks.modelo.Book;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.gson.Gson;
 
 import java.util.List;
 
@@ -41,7 +42,7 @@ public class AgregarLibro extends AppCompatActivity {
     ChipGroup chipAddWishList,chipGroupBookType,chipEstado;
     private String imageUrl = "";
     private String contexto;
-    private String isbn;
+    private String isbn, isbn2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,12 +88,14 @@ public class AgregarLibro extends AppCompatActivity {
                 }
             });
 
-            if (contexto.equals("editar")) {
-                isbn = getIntent().getStringExtra("isbn");
+            boolean datosCargados = false; // Bandera para controlar la recarga de datos
+            if (contexto.equals("editar") && !datosCargados) {
+                isbn2 = getIntent().getStringExtra("isbn");
                 TextView tvtitulo = findViewById(R.id.tv_title);
                 tvtitulo.setText("Editar libro");
-                cargarDetallesLibroAPI(isbn);
-                Log.d("AgregarLibro", "ingreso al contexto de editar");
+                cargarDetallesLibroAPI(isbn2);
+                Log.d("AgregarLibro", "Ingreso al contexto de editar");
+                datosCargados = true; // Marcar los datos como cargados
             }
             //Remitir insercion de libro
             btnSave = findViewById(R.id.btn_save);
@@ -115,6 +118,8 @@ public class AgregarLibro extends AppCompatActivity {
                     String editor = etEditor.getText().toString().trim();
                     String pagsLeidas = etPagsLeidas.getText().toString().trim();
                     String isbn = etIsbn.getText().toString().trim();
+                    //Hay un error en la aplicacion  que almomento de abri
+                    Log.d("ISBN 1 ", isbn2);
                     String numPaginas = etNumPaginas.getText().toString().trim();
                     String descripcion = etDescripcion.getText().toString().trim();
 
@@ -145,8 +150,23 @@ public class AgregarLibro extends AppCompatActivity {
                                     //Toast.makeText(AgregarLibro.this, "URL guardada: " + imageUrl, Toast.LENGTH_SHORT).show();
                                 } else if (contexto.equals("editar")) {
                                     //actualizacion de datos
-                                    Log.d("Agregar Libro", "ingreso al contexto de editar y se creo el objeto");
                                     Book libro = new Book(titulo, editor, autor, bookType, descripcion, estado, isbn, numPaginas, pagsLeidas, imageUrl);
+                                    libro.setIsbnEdit(isbn2);
+                                    Gson gson = new Gson();
+                                    String json = gson.toJson(libro);
+                                    Log.d("ActualizarLibroJSON", "Datos enviados: " + json);
+                                    ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+                                    apiService.actualizarLibro(libro).enqueue(new Callback<Void>() {
+                                        @Override
+                                        public void onResponse(Call<Void> call, Response<Void> response) {
+                                            Log.d("ActualizarLibro", "Actualizo correctaente");
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<Void> call, Throwable t) {
+                                            Log.d("ActualizarLibro", "Error al actualizar");
+                                        }
+                                    });
                                 }
                                 if (addWishList.equals("Sí")) {
                                     Log.d("AgregarLibro", "Entro al if para la creacion de la nuneva tarea");
@@ -184,26 +204,41 @@ public class AgregarLibro extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Book> listaDeLibros = response.body();
                     Book libro = listaDeLibros.get(0);
-                    etTitulo.setText(libro.getTitulo());
-                    etIsbn.setText(libro.getIsbn());
-                    etAutor.setText(libro.getAutor());
-                    etEditor.setText(libro.getEditorial());
-                    etNumPaginas.setText(libro.getnPaginas());
-                    etDescripcion.setText(libro.getDescripcion());
-                    String estado = libro.getEstado();
-                    if (estado.equals("Leyendo")){
-                        chipEstado.check(R.id.chip_read_later);
-                    } else if(estado.equals("Quiero leer")){
-                        chipEstado.check(R.id.chip_read_now);
-                    } else if (estado.equals("Leido")) {
-                        chipEstado.check(R.id.chip_finished);
-                    }else if (estado.equals("Dropeado")) {
-                        chipEstado.check(R.id.chip_give_up);
+                    if (etTitulo.getText().toString().isEmpty()) {
+                        etTitulo.setText(libro.getTitulo());
                     }
+                    if (etIsbn.getText().toString().isEmpty()) {
+                        etIsbn.setText(libro.getIsbn());
+                    }
+                    if (etAutor.getText().toString().isEmpty()) {
+                        etAutor.setText(libro.getAutor());
+                    }
+                    if (etEditor.getText().toString().isEmpty()) {
+                        etEditor.setText(libro.getEditorial());
+                    }
+                    if (etNumPaginas.getText().toString().isEmpty()) {
+                        etNumPaginas.setText(libro.getnPaginas());
+                    }
+                    if (etDescripcion.getText().toString().isEmpty()) {
+                        etDescripcion.setText(libro.getDescripcion());
+                    }
+                    // Configuración de chips y estado
+                    String estado = libro.getEstado();
+                    if (estado != null) {
+                        if (estado.equals("Leyendo")) {
+                            chipEstado.check(R.id.chip_read_later);
+                        } else if (estado.equals("Quiero leer")) {
+                            chipEstado.check(R.id.chip_read_now);
+                        } else if (estado.equals("Leido")) {
+                            chipEstado.check(R.id.chip_finished);
+                        } else if (estado.equals("Dropeado")) {
+                            chipEstado.check(R.id.chip_give_up);
+                        }
+                    }
+
                     String formato = libro.getFormato();
-                    Log.d("AgregarLibro", formato);
-                    if (formato !=null){
-                        if (formato.equals("Tapa dura")){
+                    if (formato != null) {
+                        if (formato.equals("Tapa dura")) {
                             chipGroupBookType.check(R.id.chip_hardpaper_book);
                         } else if (formato.equals("Tapa blanda")) {
                             chipGroupBookType.check(R.id.chip_softpaper_book);
@@ -213,6 +248,7 @@ public class AgregarLibro extends AppCompatActivity {
                             chipGroupBookType.check(R.id.chip_audio_book);
                         }
                     }
+                    imageUrl = libro.getCoverImageUrl();
                     ImageView imagenImageView = findViewById(R.id.iv_book_image);
                     if (libro.getCoverImageUrl() != null) {
                         Glide.with(AgregarLibro.this)
