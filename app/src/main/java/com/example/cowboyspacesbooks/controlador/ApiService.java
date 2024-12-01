@@ -30,7 +30,7 @@ public interface ApiService {
     //Insetar sesion de lectura
     @POST("sesionlectura/PostSesionLectura.php")
     Call<Void> enviarSesionDeLectura(@Body SesionLectura sesionLectura);
-    @POST("sesionlectura/PostSesionLectura.php")
+    @POST("listas/PostInsertarLista.php")
     Call<Void> insertarLista(@Body Listas lista);
 
     @PUT("libros/PutActualizarLibro.php")

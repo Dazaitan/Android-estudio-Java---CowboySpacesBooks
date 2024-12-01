@@ -70,7 +70,7 @@ public class Home extends AppCompatActivity {
                         return true;
                     } else if(item.getItemId() == R.id.nav_coleccion){
                         Intent intent = new Intent(Home.this, VisualizacionGeneral.class);
-                        intent.putExtra("contexto","listas");
+                        intent.putExtra("contexto","libros");
                         startActivity(intent);
                         return true;
                     }

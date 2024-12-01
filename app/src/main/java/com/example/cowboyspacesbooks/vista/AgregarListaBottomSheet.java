@@ -45,25 +45,34 @@ public class AgregarListaBottomSheet extends BottomSheetDialogFragment {
         btnConfirm.setOnClickListener(v -> {
             String collectionName = etCollectionName.getText().toString().trim();
             if (!collectionName.isEmpty()) {
-                if (listener != null) {
-                    Listas lista = new Listas(etCollectionName.getText().toString());
-                    ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
-                    apiService.insertarLista(lista).enqueue(new Callback<Void>() {
-                        @Override
-                        public void onResponse(Call<Void> call, Response<Void> response) {
-                            Log.d("AgregarListaBottomSheet", "Lista Insertada correctamente");
+                // Procede con la lógica para insertar la lista
+                Listas lista = new Listas(collectionName);
+                ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+                apiService.insertarLista(lista).enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.isSuccessful()) {
+                            Log.d("AgregarListaBottomSheet", "Lista insertada correctamente");
+                            if (listener != null) {
+                                listener.onListaAdded(collectionName);
+                            }
+                            dismiss(); // Cerrar el diálogo solo si la operación fue exitosa
+                        } else {
+                            Log.d("AgregarListaBottomSheet", "Error al insertar la lista");
+                            Toast.makeText(getContext(), "Error al insertar la lista.", Toast.LENGTH_SHORT).show();
                         }
-                        @Override
-                        public void onFailure(Call<Void> call, Throwable t) {
-                            Log.d("AgregarListaBottomSheet", "Lista Insertada incorrectamente");
-                        }
-                    });
-                    listener.onListaAdded(collectionName);
-                }
-                dismiss();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Log.d("AgregarListaBottomSheet", "Lista no insertada: " + t.getMessage());
+                        Toast.makeText(getContext(), "Error al conectar con el servidor.", Toast.LENGTH_SHORT).show();
+                    }
+                });
             } else {
-                Toast.makeText(getContext(), "Por favor, ingresa un nombre.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Por favor, ingresa un nombre para la lista.", Toast.LENGTH_SHORT).show();
             }
+
         });
         return view;
     }

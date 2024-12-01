@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -41,6 +42,7 @@ public class VisualizacionGeneral extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ListasAdapter listasAdapter;
     private BookAdapter bookAdapter;
+    GridLayoutManager gridLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +55,13 @@ public class VisualizacionGeneral extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        // Inicializa el RecyclerView
+
+        TextView titulo = findViewById(R.id.tv_title);
+        TextView subTitulo = findViewById(R.id.tv_subtitle);
+        // Inicializar el RecyclerView
         recyclerView = findViewById(R.id.vistaLibrosColeccion);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-        recyclerView.setLayoutManager(gridLayoutManager);
+
+
         String listaId = getIntent().getStringExtra("listaId");
         // Obtén el contexto del Intent
         String contexto = getIntent().getStringExtra("contexto");
@@ -66,10 +71,16 @@ public class VisualizacionGeneral extends AppCompatActivity {
             finish();
             return;
         }
-        // Decide qué mostrar según el contexto
+        // Decidir qué tipo de vista mostrar según el contexto
         if (contexto.equals("libros")) {
             mostrarLibros();
+            gridLayoutManager = new GridLayoutManager(this, 3);
+            recyclerView.setLayoutManager(gridLayoutManager);
         } else if (contexto.equals("listas")) {
+            gridLayoutManager = new GridLayoutManager(this, 2);
+            recyclerView.setLayoutManager(gridLayoutManager);
+            titulo.setText("Colecciones");
+            subTitulo.setText("");
             mostrarListas();
         } else {
             Toast.makeText(this, "Contexto desconocido", Toast.LENGTH_SHORT).show();
@@ -86,7 +97,7 @@ public class VisualizacionGeneral extends AppCompatActivity {
                 } else if (contexto.equals("listas")) {
                     AgregarListaBottomSheet bottomSheet = new AgregarListaBottomSheet();
                     bottomSheet.setAddCollectionListener(collectionName -> {
-                        // Aquí manejas la colección añadida
+                        // Peticion para insertar la lista
                         Toast.makeText(VisualizacionGeneral.this, "Colección añadida: " + collectionName, Toast.LENGTH_SHORT).show();
                         // Puedes actualizar tu RecyclerView o base de datos aquí
                     });
@@ -107,7 +118,6 @@ public class VisualizacionGeneral extends AppCompatActivity {
     private void mostrarLibros() {
         ApiService bookApi = RetrofitClient.getClient().create(ApiService.class);
         String listaId = getIntent().getStringExtra("listaId");
-        Log.d("VisualizacionGeneral",listaId);
         // Verifica si listaId es nulo o vacío
         if (listaId != null && !listaId.isEmpty()) {
             // Si hay un listaId, obtener los libros relacionados con la lista
