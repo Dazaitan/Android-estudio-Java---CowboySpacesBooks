@@ -65,13 +65,6 @@ public class Memorizar extends AppCompatActivity {
             return insets;
         });
         cargarNotasServidor();
-
-        // Crear datos de ejemplo
-        List<Notes> notas = new ArrayList<>();
-        notas.add(new Notes("Pruebas","Esto es una prueba","01/12/2024","https://images.cdn3.buscalibre.com/fit-in/360x360/8c/4d/8c4d7c9bb4099f68be3fda112090c7dc.jpg","Almendra","sohgn pyung",1,2));
-        notas.add(new Notes("Pruebas","Esto es una prueba","01/12/2024","https://images.cdn3.buscalibre.com/fit-in/360x360/8c/4d/8c4d7c9bb4099f68be3fda112090c7dc.jpg","Almendra","sohgn pyung",1,2));
-
-        // Configurar el adaptador
     }
     private void cargarNotasServidor(){
         ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
