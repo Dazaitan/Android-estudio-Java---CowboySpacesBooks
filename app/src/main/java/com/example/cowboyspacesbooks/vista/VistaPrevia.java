@@ -112,11 +112,11 @@ public class VistaPrevia extends AppCompatActivity {
                         }
                     });
                     //Mostrar o ocultar boton de timer dependiendo del contexto que se reciba como input
-                    if ("logros".equals(contexto)) {// Verifica el contexto y muestra oculta el segundo botón
+                    if ("Quiero leer".equals(contexto)) {// Verifica el contexto y muestra oculta el segundo botón
                         Log.d("VistaPrevia","Ingreso a la actividad");
                         // Muestra el segundo botón si el contexto es "logros"
                         btnTimer.setVisibility(View.VISIBLE);
-                    } else if ("pruebas".equals(contexto)){
+                    } else if ("Leido".equals(contexto)){
                         btnTimer.setVisibility(View.GONE);
                         Log.d("VistaPrevia", "Boton no habilitado");
                     }

@@ -96,7 +96,7 @@ public class Logros extends AppCompatActivity {
                             intent.putExtra("titulo", clickedBook.getTitulo());
                             intent.putExtra("imagenUrl", clickedBook.getCoverImageUrl());
                             intent.putExtra("isbn", clickedBook.getIsbn());
-                            intent.putExtra("contexto", "Logros");
+                            intent.putExtra("contexto", "Leido");
                             startActivity(intent);
                         }
                     });

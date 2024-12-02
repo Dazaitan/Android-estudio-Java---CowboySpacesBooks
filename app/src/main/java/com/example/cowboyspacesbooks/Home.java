@@ -102,7 +102,7 @@ public class Home extends AppCompatActivity {
                             intent.putExtra("titulo", clickedBook.getTitulo());
                             intent.putExtra("imagenUrl", clickedBook.getCoverImageUrl());
                             intent.putExtra("isbn", clickedBook.getIsbn());
-                            intent.putExtra("contexto", "pruebas");
+                            intent.putExtra("contexto", "Quiero leer");
                             startActivity(intent);
                         }
                     });
