@@ -24,6 +24,9 @@ public interface ApiService {
     //obtener una lista de libros
     @GET("libros/GetListaLibros.php")
     Call<List<Book>> obtenerLibros();
+    //obtener todas las notas
+    @GET("notas/GetObtenerNotas.php")
+    Call<List<Notes>> obtenerNotas();
     //Insetar notas
     @POST("Notas/PostInsertarNotas.php")
     Call<Void> insertarNota(@Body Notes note);

@@ -1,20 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:id="@+id/main"
     android:layout_height="match_parent"
     android:background="@color/backgroundColor"
+    android:id="@+id/main"
     tools:context=".vista.Memorizar">
 
-    <!-- Header con título y búsqueda -->
+    <!-- Fondo decorativo del encabezado -->
     <View
         android:id="@+id/fondo_negro"
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:background="@drawable/curved_background"
         tools:ignore="MissingConstraints" />
+
+    <!-- Título de la pantalla -->
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
@@ -27,6 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_margin="16dp" />
 
+    <!-- Botón de búsqueda -->
     <ImageView
         android:layout_width="24dp"
         android:layout_height="24dp"
@@ -51,7 +55,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp" />
 
-    <!-- Contenedor de tarjetas -->
+    <!-- Contenedor de tarjetas (horizontal) -->
     <LinearLayout
         android:id="@+id/cardContainer"
         android:layout_width="match_parent"
@@ -77,14 +81,12 @@
                 android:orientation="vertical"
                 android:padding="8dp"
                 android:gravity="center">
-                <!--android:textColor="#121212"-->
+
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:textColor="#121212"
                     android:src="@drawable/ic_notes"
-                    android:contentDescription="Cualquier nota"
-                    />
+                    android:contentDescription="Cualquier nota" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -117,8 +119,7 @@
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/ic_hearts"
-                    android:contentDescription="Notas que me gustaron"
-                    />
+                    android:contentDescription="Notas que me gustaron" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -132,71 +133,22 @@
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
 
-    <!-- Sección de notas -->
-    <ScrollView
-        android:layout_width="match_parent"
+    <!-- RecyclerView para mostrar notas -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_nota"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/cardContainer"
-        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:padding="16dp">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <!-- CardView de una nota -->
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp"
-                android:layout_marginBottom="16dp">
-                <!--Atributos de las notas-->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:id="@+id/tvNoteTitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#000000"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tvNoteAuthor"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#666666"
-                        android:textSize="14sp"
-                        android:layout_marginTop="4dp" />
-
-                    <TextView
-                        android:id="@+id/tvNoteDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#666666"
-                        android:textSize="12sp"
-                        android:layout_marginTop="4dp" />
-
-                    <TextView
-                        android:id="@+id/tvNoteContent"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#000000"
-                        android:textSize="14sp"
-                        android:layout_marginTop="8dp" />
-                </LinearLayout>
-            </com.google.android.material.card.MaterialCardView>
-        </LinearLayout>
-    </ScrollView>
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        android:padding="16dp" />
 
     <!-- Barra de navegación inferior -->
-    <include layout="@layout/nav_bottom_bar" />
+    <include layout="@layout/nav_bottom_bar"
+        android:id="@+id/bottom_navigation"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
