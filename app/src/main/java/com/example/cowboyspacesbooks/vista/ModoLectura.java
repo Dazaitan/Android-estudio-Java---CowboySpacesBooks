@@ -19,6 +19,8 @@ import com.bumptech.glide.Glide;
 import com.example.cowboyspacesbooks.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.w3c.dom.Text;
+
 public class ModoLectura extends AppCompatActivity {
     private TextView timerTextView;
     private ImageButton pauseButton;
@@ -133,6 +135,16 @@ public class ModoLectura extends AppCompatActivity {
                 public void onClick(View v) {
                     finish(); // Cierra la actividad actual y vuelve a la anterior
                 }
+            });
+
+            TextView noteLink = findViewById(R.id.notes_link);
+
+            noteLink.setOnClickListener(view -> {
+                // Acción al hacer clic en el TextView
+                Intent intentNotas = new Intent(ModoLectura.this, NotasLibro.class);
+                intentNotas.putExtra("isbn",isbn);
+                startActivity(intentNotas);
+
             });
             return insets;
         });

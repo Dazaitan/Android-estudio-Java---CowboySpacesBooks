@@ -47,4 +47,7 @@ public interface ApiService {
     
     @GET("listas/GetrelListasLibros.php")
     Call<List<LibroLista>> obtenerLibrosListas(@Query("lista_Id") String listaId);
+
+    @GET("notas/GetNotasporLibro.php")
+    Call<List<Notes>> obtenerNotasporLibro(@Query("isbn") String isbn);
 }
