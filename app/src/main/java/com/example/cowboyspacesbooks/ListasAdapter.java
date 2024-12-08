@@ -72,7 +72,12 @@ public class ListasAdapter extends RecyclerView.Adapter<ListasAdapter.ListasView
             // Alterna el estado de selección
             lista.setSelected(!lista.isSelected());
             notifyItemChanged(position);
+            //iniciar una nueva actividad (situacional)
+            if (listener != null) {
+                listener.onItemClick(position);
+            }
         });
+
     }
 
     @Override
@@ -91,15 +96,6 @@ public class ListasAdapter extends RecyclerView.Adapter<ListasAdapter.ListasView
             imageView = itemView.findViewById(R.id.iv_main_image);
             titleTextView = itemView.findViewById(R.id.tv_coleccion_title);
             countTextView = itemView.findViewById(R.id.tv_book_count);
-
-            itemView.setOnClickListener(v -> {
-                if (listener != null) {
-                    int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION) {
-                        listener.onItemClick(position);
-                    }
-                }
-            });
         }
 
         public void bind(Listas lista) {

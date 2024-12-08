@@ -2,34 +2,6 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
-      <entry key="AgregarLibro">
-        <State />
-      </entry>
-      <entry key="Home">
-        <State>
-          <targetSelectedWithDropDown>
-            <Target>
-              <type value="QUICK_BOOT_TARGET" />
-              <deviceKey>
-                <Key>
-                  <type value="VIRTUAL_DEVICE_PATH" />
-                  <value value="C:\Users\Jhonk\.android\avd\Pixel_7_Pro_API_35.avd" />
-                </Key>
-              </deviceKey>
-            </Target>
-          </targetSelectedWithDropDown>
-          <timeTargetWasSelectedWithDropDown value="2024-11-26T05:40:11.827470300Z" />
-        </State>
-      </entry>
-      <entry key="Memorizar">
-        <State />
-      </entry>
-      <entry key="NotasLibro">
-        <State />
-      </entry>
-      <entry key="SelectorColecciones">
-        <State />
-      </entry>
       <entry key="app">
         <State />
       </entry>
