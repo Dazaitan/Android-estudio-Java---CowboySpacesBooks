@@ -14,6 +14,6 @@
         android:title="Logros" />
     <item
         android:id="@+id/nav_coleccion"
-        android:icon="@drawable/ic_usuario"
+        android:icon="@drawable/nav_folder_ic"
         android:title="Colecciones" />
 </menu>

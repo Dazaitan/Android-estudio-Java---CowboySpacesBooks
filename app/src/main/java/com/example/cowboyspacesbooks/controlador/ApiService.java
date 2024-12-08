@@ -50,4 +50,7 @@ public interface ApiService {
 
     @GET("notas/GetNotasporLibro.php")
     Call<List<Notes>> obtenerNotasporLibro(@Query("isbn") String isbn);
+
+    @POST("relListasLibros/PostInsertarLibroLista.php")
+    Call<Void> insertarLibroEnLista(@Query("listaId") int listaId, @Query("isbn") String isbn);
 }

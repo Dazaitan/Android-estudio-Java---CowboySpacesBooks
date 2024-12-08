@@ -2,6 +2,9 @@
 <project version="4">
   <component name="deploymentTargetDropDown">
     <value>
+      <entry key="AgregarLibro">
+        <State />
+      </entry>
       <entry key="Home">
         <State>
           <targetSelectedWithDropDown>
@@ -24,10 +27,7 @@
       <entry key="NotasLibro">
         <State />
       </entry>
-      <entry key="VistaPrevia">
-        <State />
-      </entry>
-      <entry key="VisualizacionGeneral">
+      <entry key="SelectorColecciones">
         <State />
       </entry>
       <entry key="app">

@@ -3,9 +3,11 @@ package com.example.cowboyspacesbooks.modelo;
 public class Listas {
     private int lista_Id;
     private String nameList;
+    private boolean isSelected;
 
-    public Listas(String nameList) {
+    public Listas(String nameList, boolean isSelected) {
         this.nameList = nameList;
+        this.isSelected = false;
     }
 
     public Listas(int lista_Id, String nameList) {
@@ -27,5 +29,13 @@ public class Listas {
 
     public void setNameList(String nameList) {
         this.nameList = nameList;
+    }
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
     }
 }

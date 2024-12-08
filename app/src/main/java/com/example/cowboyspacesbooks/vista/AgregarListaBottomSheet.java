@@ -46,7 +46,7 @@ public class AgregarListaBottomSheet extends BottomSheetDialogFragment {
             String collectionName = etCollectionName.getText().toString().trim();
             if (!collectionName.isEmpty()) {
                 // Procede con la lógica para insertar la lista
-                Listas lista = new Listas(collectionName);
+                Listas lista = new Listas(collectionName,false);
                 ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
                 apiService.insertarLista(lista).enqueue(new Callback<Void>() {
                     @Override

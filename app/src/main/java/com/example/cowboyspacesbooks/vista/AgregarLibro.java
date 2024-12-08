@@ -20,16 +20,19 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.cowboyspacesbooks.R;
+import com.example.cowboyspacesbooks.SelectorColecciones;
 import com.example.cowboyspacesbooks.controlador.AgregarLibroListaTask;
 import com.example.cowboyspacesbooks.controlador.ApiService;
 import com.example.cowboyspacesbooks.controlador.InsertarLibroTask;
 import com.example.cowboyspacesbooks.controlador.RetrofitClient;
 import com.example.cowboyspacesbooks.modelo.Book;
+import com.example.cowboyspacesbooks.modelo.LibroLista;
 import com.google.android.material.chip.Chip;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -43,6 +46,9 @@ public class AgregarLibro extends AppCompatActivity {
     private String imageUrl = "";
     private String contexto;
     private String isbn, isbn2;
+    private static final int REQUEST_CODE_SELECCIONAR_COLECCIONES = 1001;
+    private ArrayList<Integer> listasSeleccionadas = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -119,7 +125,6 @@ public class AgregarLibro extends AppCompatActivity {
                     String pagsLeidas = etPagsLeidas.getText().toString().trim();
                     String isbn = etIsbn.getText().toString().trim();
                     //Hay un error en la aplicacion  que almomento de abri
-                    Log.d("ISBN 1 ", isbn2);
                     String numPaginas = etNumPaginas.getText().toString().trim();
                     String descripcion = etDescripcion.getText().toString().trim();
 
@@ -143,6 +148,8 @@ public class AgregarLibro extends AppCompatActivity {
                                 addWishList = selectedWishChip.getText().toString();
                                 Chip selectedChipStatus = chipEstado.findViewById(selectedChipEstado);
                                 estado = selectedChipStatus.getText().toString();
+
+                                Book libro = new Book(titulo, editor, autor, bookType, descripcion, estado, isbn, numPaginas, pagsLeidas, imageUrl);
                                 if (contexto.equals("insertar")) {
                                     Log.d("Agregar Libro", "ingreso al contexto de insertar");
                                     //Llamar nueva tarea para la insercion a la base de datos
@@ -150,7 +157,6 @@ public class AgregarLibro extends AppCompatActivity {
                                     //Toast.makeText(AgregarLibro.this, "URL guardada: " + imageUrl, Toast.LENGTH_SHORT).show();
                                 } else if (contexto.equals("editar")) {
                                     //actualizacion de datos
-                                    Book libro = new Book(titulo, editor, autor, bookType, descripcion, estado, isbn, numPaginas, pagsLeidas, imageUrl);
                                     libro.setIsbnEdit(isbn2);
                                     /*Gson gson = new Gson();
                                     String json = gson.toJson(libro);
@@ -168,6 +174,14 @@ public class AgregarLibro extends AppCompatActivity {
                                         }
                                     });
                                 }
+
+                                // Enviar datos a cada lista seleccionada
+                                if (!listasSeleccionadas.isEmpty()){
+                                    for (int listaId : listasSeleccionadas) {
+                                        insertarRelListasLibros(listaId, isbn);
+                                    }
+                                }
+
                                 if (addWishList.equals("Sí")) {
                                     Log.d("AgregarLibro", "Entro al if para la creacion de la nuneva tarea");
                                     new AgregarLibroListaTask(AgregarLibro.this).execute("7", isbn);
@@ -192,6 +206,12 @@ public class AgregarLibro extends AppCompatActivity {
                 public void onClick(View v) {
                     finish(); // Cierra la actividad actual y vuelve a la anterior
                 }
+            });
+
+            TextView seleccionarColecciones = findViewById(R.id.tv_SeleccionarColeccion);
+            seleccionarColecciones.setOnClickListener(view -> {
+                Intent intent = new Intent(AgregarLibro.this, SelectorColecciones.class);
+                startActivityForResult(intent, REQUEST_CODE_SELECCIONAR_COLECCIONES);
             });
             return insets;
         });
@@ -272,4 +292,38 @@ public class AgregarLibro extends AppCompatActivity {
             }
         });
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE_SELECCIONAR_COLECCIONES && resultCode == RESULT_OK && data != null) {
+            listasSeleccionadas = data.getIntegerArrayListExtra("idsSeleccionados");
+            if (listasSeleccionadas != null) {
+                for (int id : listasSeleccionadas) {
+                    Log.d("AgregarLibro", "ID de lista seleccionada: " + id);
+                }
+            }
+        }
+    }
+    private void insertarRelListasLibros(int listaId, String isbn) {
+        ApiService apiService = RetrofitClient.getClient().create(ApiService.class);
+
+        // Llamada al endpoint para enviar el ID de la lista y el ISBN
+        apiService.insertarLibroEnLista(listaId, isbn).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Log.d("AgregarLibro", "Datos enviados: Lista ID = " + listaId + ", ISBN = " + isbn);
+                } else {
+                    Log.e("AgregarLibro", "Error en la respuesta: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("AgregarLibro", "Error al conectar con el servidor.", t);
+            }
+        });
+    }
+
+
 }

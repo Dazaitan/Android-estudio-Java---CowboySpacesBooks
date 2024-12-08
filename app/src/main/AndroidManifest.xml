@@ -16,6 +16,9 @@
         android:theme="@style/Theme.CowboySpacesBooks"
         tools:targetApi="31">
         <activity
+            android:name=".SelectorColecciones"
+            android:exported="true" />
+        <activity
             android:name=".vista.NotasLibro"
             android:exported="true" />
         <activity

@@ -368,6 +368,7 @@
                 app:tint="@color/black" />
 
             <TextView
+                android:id="@+id/tv_SeleccionarColeccion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Seleccionar colecciones"

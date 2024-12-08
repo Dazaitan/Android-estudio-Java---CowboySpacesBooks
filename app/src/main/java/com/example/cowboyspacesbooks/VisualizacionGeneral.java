@@ -210,7 +210,7 @@ public class VisualizacionGeneral extends AppCompatActivity {
             public void onResponse(Call<List<Listas>> call, Response<List<Listas>> response) {
                 if (response.isSuccessful() && response.body() !=null){
                     List<Listas> listaColeccion = response.body();
-                    listasAdapter = new ListasAdapter(VisualizacionGeneral.this,listaColeccion);
+                    listasAdapter = new ListasAdapter(VisualizacionGeneral.this,listaColeccion,true);
                     recyclerView.setAdapter(listasAdapter);
                     listasAdapter.setOnItemClickListener(new ListasAdapter.OnItemClickListener() {
                         @Override
